@@ -1,0 +1,56 @@
+[
+  {
+    "name": "AI Flywheel Framework",
+    "category": "AI / Framework",
+    "description": "Framework for AI-driven development workflows.",
+    "url": "https://github.com/infoconex/ai-flywheel-framework"
+  },
+  {
+    "name": "AI Flywheel CLI",
+    "category": "AI / Tooling",
+    "description": "Command-line tooling for the AI Flywheel ecosystem.",
+    "url": "https://github.com/infoconex/ai-flywheel-cli"
+  },
+  {
+    "name": "AI Flywheel CLI Python",
+    "category": "AI / Python",
+    "description": "Python CLI tooling for AI Flywheel workflows.",
+    "url": "https://github.com/infoconex/ai-flywheel-cli-python"
+  },
+  {
+    "name": "AI Flywheel Specification",
+    "category": "AI / Specification",
+    "description": "Public specifications for the AI Flywheel project.",
+    "url": "https://github.com/infoconex/ai-flywheel-spec"
+  },
+  {
+    "name": "AI Flywheel Framework Testing",
+    "category": "AI / Testing",
+    "description": "Testing resources for the AI Flywheel framework.",
+    "url": "https://github.com/infoconex/ai-flywheel-framework-testing"
+  },
+  {
+    "name": "Coding Blog",
+    "category": "Writing",
+    "description": "Source repository for technical writing and experiments.",
+    "url": "https://github.com/infoconex/coding-blog"
+  },
+  {
+    "name": "Isolated .NET SDK",
+    "category": ".NET",
+    "description": "Experiments and tooling around an isolated .NET SDK.",
+    "url": "https://github.com/infoconex/isolated-dotnet-sdk"
+  },
+  {
+    "name": "Copy GitHub Repo",
+    "category": "Developer Tools",
+    "description": "Repository-focused developer utility.",
+    "url": "https://github.com/infoconex/copy-github-repo"
+  },
+  {
+    "name": "NuGet Publication Cooldown POC",
+    "category": ".NET / POC",
+    "description": "Proof of concept related to NuGet package publication.",
+    "url": "https://github.com/infoconex/nuget-publication-cooldown-poc"
+  }
+]
