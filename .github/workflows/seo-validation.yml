@@ -1,18 +1,35 @@
-name: SEO validation
+name: Build and validate project SEO
 on:
   push:
     branches: [main]
   pull_request:
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
-  check:
+  build-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Validate metadata, links, and sitemaps
+      - name: Generate crawlable pages from projects.json
+        run: python scripts/build_projects.py
+      - name: Validate metadata, internal links and sitemaps
         run: python scripts/validate_seo.py
+      - name: Ensure pull requests commit generated files
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code -- index.html pages-sitemap.xml projects/
+      - name: Commit generated pages on main
+        if: github.event_name != 'pull_request'
+        run: |
+          if ! git diff --quiet -- index.html pages-sitemap.xml projects/; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add index.html pages-sitemap.xml projects/
+            git commit -m "Regenerate project pages and sitemap from projects.json"
+            git push
+          fi
