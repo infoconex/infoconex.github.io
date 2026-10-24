@@ -4,28 +4,32 @@
     "category": "Writing",
     "description": "Articles on software engineering, system architecture, .NET development, tooling, and practical lessons learned from hands-on experiments.",
     "url": "https://github.com/infoconex/coding-blog",
-    "order": 10
+    "order": 10,
+    "website": "https://coding.infoconex.com/"
   },
   {
     "name": "Isolated .NET SDK",
     "category": ".NET",
     "description": "Install, audit, verify, and remove exact .NET SDK versions in a user-owned directory without changing system-wide SDKs or PATH. Supports PowerShell on Windows and Bash on Linux/macOS.",
     "url": "https://github.com/infoconex/isolated-dotnet-sdk",
-    "order": 20
+    "order": 20,
+    "website": "https://infoconex.github.io/isolated-dotnet-sdk/"
   },
   {
     "name": "Copy GitHub Repo",
     "category": "Developer Tools",
     "description": "PowerShell module for copying or migrating GitHub repositories. Choose a clean Snapshot or history-preserving FullHistory mode, with preview plans and safety checks.",
     "url": "https://github.com/infoconex/copy-github-repo",
-    "order": 30
+    "order": 30,
+    "website": "https://infoconex.github.io/copy-github-repo/"
   },
   {
     "name": "AI Flywheel Specification",
     "category": "AI / Specification",
     "description": "An evidence-driven AI operating model: execute work, observe outcomes, evaluate evidence, validate improvements, and reuse learning in future execution under defined governance.",
     "url": "https://github.com/infoconex/ai-flywheel-spec",
-    "order": 40
+    "order": 40,
+    "website": "https://infoconex.github.io/ai-flywheel-spec/"
   },
   {
     "name": "AI Flywheel Framework",
