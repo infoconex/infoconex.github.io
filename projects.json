@@ -53,17 +53,17 @@
     "order": 70
   },
   {
-    "name": "NuGet Publication Cooldown POC",
-    "category": ".NET / POC",
-    "description": "Reproducible PowerShell experiments testing NuGet's .NET 11 RC2 package publication cooldown and its effects on automatic version selection versus explicit restore.",
-    "url": "https://github.com/infoconex/nuget-publication-cooldown-poc",
-    "order": 80
-  },
-  {
     "name": "AI Flywheel Framework Testing",
     "category": "AI / Testing",
     "description": "Repeatable framework tests using versioned prompts, fixtures, runners, and captured evidence to assess normal, boundary, failure, and recovery scenarios.",
     "url": "https://github.com/infoconex/ai-flywheel-framework-testing",
+    "order": 80
+  },
+  {
+    "name": "NuGet Publication Cooldown POC",
+    "category": ".NET / POC",
+    "description": "Reproducible PowerShell experiments testing NuGet's .NET 11 RC2 package publication cooldown and its effects on automatic version selection versus explicit restore.",
+    "url": "https://github.com/infoconex/nuget-publication-cooldown-poc",
     "order": 90
   }
 ]
