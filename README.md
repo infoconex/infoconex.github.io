@@ -17,10 +17,10 @@ In **Settings → Pages**, select **Deploy from a branch** and set **main / (roo
 
 ## Add or edit a project
 
-There is **no automatic GitHub repository discovery** and project cards are **intentionally not built from JavaScript**. When adding a project:
+Use orders 10, 20, 30, etc., leaving room to insert new projects between existing ones. Both `order` in `projects.json` and `data-order` in `index.html` should agree. The homepage sorts by `data-order` when JavaScript is available; its committed HTML retains a crawlable initial order.\n\nThere is **no automatic GitHub repository discovery** and project cards are **intentionally not built from JavaScript**. When adding a project:
 
-1. Add or edit its entry in `projects.json` (public repositories only).
-2. Add a crawlable project card linking to `/projects/<repo-name>/` in `index.html`.
+1. Add or edit its entry in `projects.json` (public repositories only), including a numeric `order` field (lower values appear first).
+2. Add a crawlable project card linking to `/projects/<repo-name>/` in `index.html`, with matching `data-order`. Keep the static card order aligned with numeric order for non-JavaScript visitors and crawlers.
 3. Create or update `projects/<repo-name>/index.html` with original, helpful project details, canonical URL, and metadata.
 4. Add the new canonical URL to `pages-sitemap.xml`.
 5. Run `python scripts/validate_seo.py` before committing. CI runs this automatically.
