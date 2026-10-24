@@ -15,17 +15,39 @@ In **Settings → Pages**, select **Deploy from a branch** and set **main / (roo
 - `robots.txt` advertises the sitemap index.
 - The GitHub Actions workflow `.github/workflows/seo-validation.yml` checks HTML canonical metadata, internal links, sitemap entries, and consistency with `projects.json`.
 
-## Add or edit a project
+## Maintain projects (single source of truth)
 
-Use orders 10, 20, 30, etc., leaving room to insert new projects between existing ones. Both `order` in `projects.json` and `data-order` in `index.html` should agree. The homepage sorts by `data-order` when JavaScript is available; its committed HTML retains a crawlable initial order.\n\nThere is **no automatic GitHub repository discovery** and project cards are **intentionally not built from JavaScript**. When adding a project:
+Edit **`projects.json`** to add projects, change descriptions, adjust the numeric `order` (lower numbers first), and optionally supply a `website` URL for published documentation. Only public repositories should be listed.
 
-1. Add or edit its entry in `projects.json` (public repositories only), including a numeric `order` field (lower values appear first).
-2. Add a crawlable project card linking to `/projects/<repo-name>/` in `index.html`, with matching `data-order`. Keep the static card order aligned with numeric order for non-JavaScript visitors and crawlers.
-3. Create or update `projects/<repo-name>/index.html` with original, helpful project details, canonical URL, and metadata.
-4. Add the new canonical URL to `pages-sitemap.xml`.
-5. Run `python scripts/validate_seo.py` before committing. CI runs this automatically.
+Example:
 
-Where possible, link to both the GitHub source and its hosted documentation. Avoid duplicating a whole README just for SEO.
+```json
+{
+  "name": "Example Tool",
+  "category": "Developer Tools",
+  "description": "A useful and specific description of what the tool does.",
+  "url": "https://github.com/infoconex/example-tool",
+  "order": 35,
+  "website": "https://example.com/docs/"
+}
+```
+
+The `scripts/build_projects.py` generator reads this catalog and updates:
+- Static, search-engine-readable project cards in `index.html`
+- JSON-LD project order on the homepage
+- All `projects/<repo-name>/index.html` landing pages and their SEO metadata
+- `pages-sitemap.xml`
+
+To regenerate and validate locally:
+
+```bash
+python scripts/build_projects.py
+python scripts/validate_seo.py
+```
+
+The GitHub Actions workflow regenerates these files automatically after pushes to `main`, then commits any resulting changes. Pull requests must include generated files and pass validation. GitHub Actions needs permission to write repository contents; repository rules that forbid bot pushes may require a pull-request workflow instead.
+
+**Do not edit generated cards, landing pages, or the page sitemap directly:** the next generation run will overwrite them. Keep project descriptions accurate and avoid claims of functionality that is still planned.
 
 ## Search indexing
 
@@ -39,7 +61,7 @@ The sitemap URLs from other project sites are references, not proof of live depl
 ## Files
 
 - `index.html`, `styles.css`, `script.js` — homepage and interactive filtering
-- `projects.json` — project catalog and consistency inventory
+- `projects.json` — authoritative project catalog, ordering, and descriptions\n- `scripts/build_projects.py` — static HTML, JSON-LD, and sitemap generator
 - `projects/*/index.html` — search-engine-readable project detail pages
 - `pages-sitemap.xml` — local page URLs
 - `sitemap.xml` — aggregate sitemap index
