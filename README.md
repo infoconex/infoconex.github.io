@@ -1,43 +1,48 @@
 # infoconex.github.io
 
-A static, searchable index of public projects for **https://infoconex.github.io/**.
+A static, searchable directory of public engineering projects published at **https://infoconex.github.io/**.
 
-## Publish with GitHub Pages
+## Publishing
 
-1. Open **Settings → Pages** in this repository.
-2. Under **Build and deployment**, choose **Deploy from a branch**.
-3. Select **main** and **/(root)**, then save.
-4. GitHub Pages will publish the site at **https://infoconex.github.io/** once deployment completes.
+In **Settings → Pages**, select **Deploy from a branch** and set **main / (root)**. This is a plain HTML site with no build dependencies.
 
-No packages, frameworks, build commands, or secrets are required.
+## Pages and discovery
 
-## Add a project
+- `index.html` includes crawlable HTML links to all 9 project pages. Search filtering is progressive enhancement and does not remove links for visitors without JavaScript.
+- `projects/<repo-name>/index.html` is a distinct indexable landing page with its own canonical URL, descriptive title, social metadata, and structured data. Some pages link to published documentation.
+- `pages-sitemap.xml` lists the homepage and all project landing pages.
+- `sitemap.xml` is the sitemap index, also referencing published Jekyll project sitemaps.
+- `robots.txt` advertises the sitemap index.
+- The GitHub Actions workflow `.github/workflows/seo-validation.yml` checks HTML canonical metadata, internal links, sitemap entries, and consistency with `projects.json`.
 
-Edit `projects.json` and add a new entry:
+## Add or edit a project
 
-```json
-{
-  "name": "My Project",
-  "category": "Developer Tools",
-  "description": "A short description of the project.",
-  "url": "https://github.com/infoconex/my-project"
-}
-```
+There is **no automatic GitHub repository discovery** and project cards are **intentionally not built from JavaScript**. When adding a project:
 
-Keep the array valid JSON. The homepage reads this file and renders a searchable card for each project. Only add public repositories or other URLs you intend to share.
+1. Add or edit its entry in `projects.json` (public repositories only).
+2. Add a crawlable project card linking to `/projects/<repo-name>/` in `index.html`.
+3. Create or update `projects/<repo-name>/index.html` with original, helpful project details, canonical URL, and metadata.
+4. Add the new canonical URL to `pages-sitemap.xml`.
+5. Run `python scripts/validate_seo.py` before committing. CI runs this automatically.
 
-## SEO and crawling
+Where possible, link to both the GitHub source and its hosted documentation. Avoid duplicating a whole README just for SEO.
 
-- `robots.txt` is served from `/robots.txt` and points to the sitemap.
-- `sitemap.xml` is served from `/sitemap.xml`; it includes the site's canonical homepage.
-- External GitHub repository links are **not** included in this site's sitemap because they are on a different host.
-- If you add new HTML pages to this site later, add their canonical URLs to `sitemap.xml`.
+## Search indexing
 
-## Structure
+1. Enable GitHub Pages and confirm the published site works.
+2. Verify ownership in [Google Search Console](https://search.google.com/search-console/).
+3. Submit `https://infoconex.github.io/sitemap.xml`.
+4. Check coverage and indexing reports after Google crawls the site. Verification and submission must be completed in the appropriate Google account.
 
-- `index.html`: homepage and metadata
-- `styles.css`: responsive design
-- `script.js`: search and project rendering
-- `projects.json`: editable project catalog
-- `robots.txt`, `sitemap.xml`: crawl discovery
-- `favicon.svg`: site icon
+The sitemap URLs from other project sites are references, not proof of live deployment. Check their live status independently. Avoid submitting unverified links to search engines.
+
+## Files
+
+- `index.html`, `styles.css`, `script.js` — homepage and interactive filtering
+- `projects.json` — project catalog and consistency inventory
+- `projects/*/index.html` — search-engine-readable project detail pages
+- `pages-sitemap.xml` — local page URLs
+- `sitemap.xml` — aggregate sitemap index
+- `robots.txt` — crawler directions
+- `scripts/validate_seo.py` — standard-library SEO integrity check
+
