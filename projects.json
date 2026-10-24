@@ -3,54 +3,63 @@
     "name": "AI Flywheel Framework",
     "category": "AI / Framework",
     "description": "Framework for AI-driven development workflows.",
-    "url": "https://github.com/infoconex/ai-flywheel-framework"
+    "url": "https://github.com/infoconex/ai-flywheel-framework",
+    "order": 10
   },
   {
     "name": "AI Flywheel CLI",
     "category": "AI / Tooling",
     "description": "Command-line tooling for the AI Flywheel ecosystem.",
-    "url": "https://github.com/infoconex/ai-flywheel-cli"
+    "url": "https://github.com/infoconex/ai-flywheel-cli",
+    "order": 20
   },
   {
     "name": "AI Flywheel CLI Python",
     "category": "AI / Python",
     "description": "Python CLI tooling for AI Flywheel workflows.",
-    "url": "https://github.com/infoconex/ai-flywheel-cli-python"
+    "url": "https://github.com/infoconex/ai-flywheel-cli-python",
+    "order": 30
   },
   {
     "name": "AI Flywheel Specification",
     "category": "AI / Specification",
     "description": "Public specifications for the AI Flywheel project.",
-    "url": "https://github.com/infoconex/ai-flywheel-spec"
+    "url": "https://github.com/infoconex/ai-flywheel-spec",
+    "order": 40
   },
   {
     "name": "AI Flywheel Framework Testing",
     "category": "AI / Testing",
     "description": "Testing resources for the AI Flywheel framework.",
-    "url": "https://github.com/infoconex/ai-flywheel-framework-testing"
+    "url": "https://github.com/infoconex/ai-flywheel-framework-testing",
+    "order": 50
   },
   {
     "name": "Coding Blog",
     "category": "Writing",
     "description": "Source repository for technical writing and experiments.",
-    "url": "https://github.com/infoconex/coding-blog"
+    "url": "https://github.com/infoconex/coding-blog",
+    "order": 60
   },
   {
     "name": "Isolated .NET SDK",
     "category": ".NET",
     "description": "Experiments and tooling around an isolated .NET SDK.",
-    "url": "https://github.com/infoconex/isolated-dotnet-sdk"
+    "url": "https://github.com/infoconex/isolated-dotnet-sdk",
+    "order": 70
   },
   {
     "name": "Copy GitHub Repo",
     "category": "Developer Tools",
     "description": "Repository-focused developer utility.",
-    "url": "https://github.com/infoconex/copy-github-repo"
+    "url": "https://github.com/infoconex/copy-github-repo",
+    "order": 80
   },
   {
     "name": "NuGet Publication Cooldown POC",
     "category": ".NET / POC",
     "description": "Proof of concept related to NuGet package publication.",
-    "url": "https://github.com/infoconex/nuget-publication-cooldown-poc"
+    "url": "https://github.com/infoconex/nuget-publication-cooldown-poc",
+    "order": 90
   }
 ]
