@@ -3,3 +3,5 @@ Allow: /
 
 Sitemap: https://infoconex.github.io/sitemap.xml
 Sitemap: https://coding.infoconex.com/sitemap.xml
+Sitemap: https://infoconex.github.io/copy-github-repo/sitemap.xml
+Sitemap: https://infoconex.github.io/ai-flywheel-spec/sitemap.xml
