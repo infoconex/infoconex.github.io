@@ -2,63 +2,63 @@
   {
     "name": "Coding Blog",
     "category": "Writing",
-    "description": "Source repository for technical writing and experiments.",
+    "description": "Articles on software engineering, system architecture, .NET development, tooling, and practical lessons learned from hands-on experiments.",
     "url": "https://github.com/infoconex/coding-blog",
     "order": 10
   },
   {
     "name": "Isolated .NET SDK",
     "category": ".NET",
-    "description": "Experiments and tooling around an isolated .NET SDK.",
+    "description": "Install, audit, verify, and remove exact .NET SDK versions in a user-owned directory without changing system-wide SDKs or PATH. Supports PowerShell on Windows and Bash on Linux/macOS.",
     "url": "https://github.com/infoconex/isolated-dotnet-sdk",
     "order": 20
   },
   {
     "name": "Copy GitHub Repo",
     "category": "Developer Tools",
-    "description": "Repository-focused developer utility.",
+    "description": "PowerShell module for copying or migrating GitHub repositories. Choose a clean Snapshot or history-preserving FullHistory mode, with preview plans and safety checks.",
     "url": "https://github.com/infoconex/copy-github-repo",
     "order": 30
   },
   {
     "name": "AI Flywheel Specification",
     "category": "AI / Specification",
-    "description": "Public specifications for the AI Flywheel project.",
+    "description": "An evidence-driven AI operating model: execute work, observe outcomes, evaluate evidence, validate improvements, and reuse learning in future execution under defined governance.",
     "url": "https://github.com/infoconex/ai-flywheel-spec",
     "order": 40
   },
   {
     "name": "AI Flywheel Framework",
     "category": "AI / Framework",
-    "description": "Framework for AI-driven development workflows.",
+    "description": "Installable, implementation-neutral AI Flywheel framework providing repository onboarding, mission and goal records, lifecycle guidance, evidence capture, and governance.",
     "url": "https://github.com/infoconex/ai-flywheel-framework",
     "order": 50
   },
   {
     "name": "AI Flywheel CLI",
     "category": "AI / Tooling",
-    "description": "Command-line tooling for the AI Flywheel ecosystem.",
+    "description": "In-development cross-platform .NET CLI for initializing, managing, validating, and upgrading AI Flywheel installations, missions, and goals.",
     "url": "https://github.com/infoconex/ai-flywheel-cli",
     "order": 60
   },
   {
     "name": "AI Flywheel CLI Python",
     "category": "AI / Python",
-    "description": "Python CLI tooling for AI Flywheel workflows.",
+    "description": "Python 3.11+ CLI for inspecting, validating, installing, and operating AI Flywheel artifacts locally, with safeguards, structured results, and lifecycle commands.",
     "url": "https://github.com/infoconex/ai-flywheel-cli-python",
     "order": 70
   },
   {
     "name": "NuGet Publication Cooldown POC",
     "category": ".NET / POC",
-    "description": "Proof of concept related to NuGet package publication.",
+    "description": "Reproducible PowerShell experiments testing NuGet's .NET 11 RC2 package publication cooldown and its effects on automatic version selection versus explicit restore.",
     "url": "https://github.com/infoconex/nuget-publication-cooldown-poc",
     "order": 80
   },
   {
     "name": "AI Flywheel Framework Testing",
     "category": "AI / Testing",
-    "description": "Testing resources for the AI Flywheel framework.",
+    "description": "Repeatable framework tests using versioned prompts, fixtures, runners, and captured evidence to assess normal, boundary, failure, and recovery scenarios.",
     "url": "https://github.com/infoconex/ai-flywheel-framework-testing",
     "order": 90
   }
