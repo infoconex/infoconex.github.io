@@ -86,7 +86,7 @@ for project, slug in zip(projects, slugs):
     content = f'''<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b1220"><meta name="description" content="{e(desc)}">
+<meta name="theme-color" content="#F8FAFC"><meta name="description" content="{e(desc)}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="infoconex"><meta property="og:title" content="{e(name)} | infoconex"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{canonical}">
 <meta name="twitter:card" content="summary"><meta name="twitter:title" content="{e(name)} | infoconex"><meta name="twitter:description" content="{e(desc)}">
 <link rel="canonical" href="{canonical}"><link rel="icon" href="../../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../styles.css">
