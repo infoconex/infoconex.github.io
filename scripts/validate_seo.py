@@ -9,7 +9,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = "https://infoconex.github.io"
+BASE = "https://projects.infoconex.com"
 projects = json.loads((ROOT / "projects.json").read_text())
 paths = ["/"] + [f"/projects/{p['url'].rstrip('/').split('/')[-1]}/" for p in projects]
 ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
