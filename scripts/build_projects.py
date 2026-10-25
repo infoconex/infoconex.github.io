@@ -12,7 +12,7 @@ from urllib.parse import urlparse
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = "https://infoconex.github.io"
+BASE = "https://projects.infoconex.com"
 projects = json.loads((ROOT / "projects.json").read_text(encoding="utf-8"))
 assert isinstance(projects, list) and projects
 assert all(isinstance(p.get("order"), int) and p.get("name") and p.get("description") and p.get("category") for p in projects)
@@ -39,7 +39,7 @@ def external_links_new_tab(markup):
             return tag
         href = html.unescape(href_match.group(1))
         parsed = urlparse(href)
-        if parsed.scheme not in ("https", "http") or parsed.hostname == "infoconex.github.io":
+        if parsed.scheme not in ("https", "http") or parsed.hostname == "projects.infoconex.com":
             return tag
         # Preserve the existing label and other attributes; normalize attributes.
         tag = re.sub(r'\s+target="[^"]*"', "", tag)
