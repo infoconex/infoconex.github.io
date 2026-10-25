@@ -143,6 +143,7 @@ for project, slug in zip(projects, slugs):
 <aside class="case-aside" aria-label="On this page"><h2>On this page</h2>
 <nav class="case-toc" aria-label="Project sections"><a href="#problem">The problem</a><a href="#solution">The solution</a><a href="#audience">Who it's for</a><a href="#workflow">How it works</a><a href="#decisions">Design decisions</a><a href="#status">Current state</a></nav>
 <div class="case-rule"></div><div class="case-aside-links"><a href="{e(github)}">View source code ↗</a>{docs_aside}</div>
+<div class="case-rule"></div><nav class="case-aside-links" aria-label="Site navigation"><a href="/#projects">All projects</a><a href="https://github.com/infoconex">GitHub ↗</a></nav>
 </aside></div></main>
 <footer class="site-footer"><div class="container footer-inner"><span>© infoconex</span><nav aria-label="Footer navigation"><a href="/#projects">All projects</a><a href="https://github.com/infoconex">GitHub ↗</a></nav></div></footer>
 </body></html>'''
