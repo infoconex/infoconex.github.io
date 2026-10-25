@@ -34,7 +34,7 @@ def external_links_new_tab(markup):
     """Open off-site links separately without changing internal navigation."""
     def update(match):
         tag = match.group(0)
-        href_match = re.search(r'\\bhref="([^"]+)"', tag)
+        href_match = re.search(r'\bhref="([^"]+)"', tag)
         if not href_match:
             return tag
         href = html.unescape(href_match.group(1))
@@ -42,10 +42,10 @@ def external_links_new_tab(markup):
         if parsed.scheme not in ("https", "http") or parsed.hostname == "infoconex.github.io":
             return tag
         # Preserve the existing label and other attributes; normalize attributes.
-        tag = re.sub(r'\\s+target="[^"]*"', "", tag)
-        tag = re.sub(r'\\s+rel="[^"]*"', "", tag)
+        tag = re.sub(r'\s+target="[^"]*"', "", tag)
+        tag = re.sub(r'\s+rel="[^"]*"', "", tag)
         return tag[:-1] + ' target="_blank" rel="noopener noreferrer">'
-    return re.sub(r'<a\\b[^>]*>', update, markup)
+    return re.sub(r'<a\b[^>]*>', update, markup)
 
 
 homepage = ROOT / "index.html"
