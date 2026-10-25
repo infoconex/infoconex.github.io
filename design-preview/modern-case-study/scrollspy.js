@@ -11,6 +11,10 @@
     sections.forEach((section, i) => {
       if (section.getBoundingClientRect().top <= readingLine) current = i;
     });
+    // Near the bottom, later sections may never cross the reading line.
+    // Treat the final section as active when the reader reaches the page end.
+    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 12;
+    if (atBottom) current = sections.length - 1;
     links.forEach((link, i) => {
       const active = i === current;
       link.classList.toggle('active', active);
