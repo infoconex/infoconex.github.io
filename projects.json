@@ -5,7 +5,14 @@
     "description": "Articles on software engineering, system architecture, .NET development, tooling, and practical lessons learned from hands-on experiments.",
     "url": "https://github.com/infoconex/coding-blog",
     "order": 10,
-    "website": "https://coding.infoconex.com/"
+    "website": "https://coding.infoconex.com/",
+    "overview": "A technical writing home for documenting practical engineering decisions, experiments, and lessons learned. The published site organizes articles for readers who want implementation detail rather than short announcements.",
+    "highlights": [
+      "Software engineering and system architecture articles",
+      "Hands-on .NET and developer-tooling notes",
+      "Technical experiments and lessons learned"
+    ],
+    "audience": "Engineers looking for practical write-ups and worked examples."
   },
   {
     "name": "Isolated .NET SDK",
@@ -13,7 +20,14 @@
     "description": "Install, audit, verify, and remove exact .NET SDK versions in a user-owned directory without changing system-wide SDKs or PATH. Supports PowerShell on Windows and Bash on Linux/macOS.",
     "url": "https://github.com/infoconex/isolated-dotnet-sdk",
     "order": 20,
-    "website": "https://infoconex.github.io/isolated-dotnet-sdk/"
+    "website": "https://infoconex.github.io/isolated-dotnet-sdk/",
+    "overview": "Use exact .NET SDK versions without modifying the machine-wide installation or PATH. The project focuses on repeatable local SDK management across development and automation environments.",
+    "highlights": [
+      "Install and remove specific SDK versions in a user-owned directory",
+      "Audit and verify the installed SDK inventory",
+      "PowerShell support on Windows and Bash support on Linux and macOS"
+    ],
+    "audience": "Developers and CI maintainers who need predictable SDK versions without system-wide changes."
   },
   {
     "name": "Copy GitHub Repo",
@@ -21,7 +35,14 @@
     "description": "PowerShell module for copying or migrating GitHub repositories. Choose a clean Snapshot or history-preserving FullHistory mode, with preview plans and safety checks.",
     "url": "https://github.com/infoconex/copy-github-repo",
     "order": 30,
-    "website": "https://infoconex.github.io/copy-github-repo/"
+    "website": "https://infoconex.github.io/copy-github-repo/",
+    "overview": "A PowerShell-based approach to copying or migrating GitHub repositories with deliberate choices about source history and a preview of the intended operation.",
+    "highlights": [
+      "Snapshot mode creates a clean copy; FullHistory preserves history",
+      "Preview plans before making repository changes",
+      "Built-in checks help avoid unsafe copy operations"
+    ],
+    "audience": "Repository maintainers migrating projects or creating controlled copies."
   },
   {
     "name": "AI Flywheel Specification",
@@ -29,41 +50,83 @@
     "description": "An evidence-driven AI operating model: execute work, observe outcomes, evaluate evidence, validate improvements, and reuse learning in future execution under defined governance.",
     "url": "https://github.com/infoconex/ai-flywheel-spec",
     "order": 40,
-    "website": "https://infoconex.github.io/ai-flywheel-spec/"
+    "website": "https://infoconex.github.io/ai-flywheel-spec/",
+    "overview": "Defines the operating rules for a governed improvement cycle in AI-assisted work. Rather than treating each execution as isolated, the specification connects goals, evidence, evaluation, and reusable learning.",
+    "highlights": [
+      "Defines an execution-to-evidence-to-improvement lifecycle",
+      "Distinguishes validated learning from unverified observations",
+      "Establishes governance and traceability for continued operation"
+    ],
+    "audience": "Teams designing evidence-driven, repeatable AI-assisted engineering processes."
   },
   {
     "name": "AI Flywheel Framework",
     "category": "AI / Framework",
     "description": "Installable, implementation-neutral AI Flywheel framework providing repository onboarding, mission and goal records, lifecycle guidance, evidence capture, and governance.",
     "url": "https://github.com/infoconex/ai-flywheel-framework",
-    "order": 50
+    "order": 50,
+    "overview": "The installable operating model that brings the AI Flywheel specification into a repository. It provides canonical artifacts and an onboarding process before repository-specific automation is built.",
+    "highlights": [
+      "Installs a canonical .flywheel structure and manifest-driven startup",
+      "Provides onboarding, bootstrap missions, and goal records",
+      "Captures lifecycle state, evidence, learning, and governance"
+    ],
+    "audience": "Repository owners adopting the AI Flywheel operating model."
   },
   {
     "name": "AI Flywheel CLI",
     "category": "AI / Tooling",
     "description": "In-development cross-platform .NET CLI for initializing, managing, validating, and upgrading AI Flywheel installations, missions, and goals.",
     "url": "https://github.com/infoconex/ai-flywheel-cli",
-    "order": 60
+    "order": 60,
+    "overview": "A planned cross-platform .NET command-line interface for managing Flywheel installations. Its command surface is being developed to make common lifecycle tasks consistent and scriptable.",
+    "highlights": [
+      "Planned installation and initialization commands",
+      "Planned mission and goal management, validation, and upgrades",
+      "Designed for cross-platform use and machine-readable automation output"
+    ],
+    "audience": "Developers planning to operate Flywheel workflows from a terminal or CI pipeline."
   },
   {
     "name": "AI Flywheel CLI Python",
     "category": "AI / Python",
     "description": "Python 3.11+ CLI for inspecting, validating, installing, and operating AI Flywheel artifacts locally, with safeguards, structured results, and lifecycle commands.",
     "url": "https://github.com/infoconex/ai-flywheel-cli-python",
-    "order": 70
+    "order": 70,
+    "overview": "A Python command-line companion for inspecting and operating local AI Flywheel artifacts, with structured results and safeguards around modifications.",
+    "highlights": [
+      "Inspect and validate local Flywheel artifacts",
+      "Support installation and lifecycle operations",
+      "Use structured command results for automation and diagnostics"
+    ],
+    "audience": "Python users and automation authors integrating AI Flywheel operations."
   },
   {
     "name": "AI Flywheel Framework Testing",
     "category": "AI / Testing",
     "description": "Repeatable framework tests using versioned prompts, fixtures, runners, and captured evidence to assess normal, boundary, failure, and recovery scenarios.",
     "url": "https://github.com/infoconex/ai-flywheel-framework-testing",
-    "order": 80
+    "order": 80,
+    "overview": "A separate test harness and evidence store for evaluating the AI Flywheel Framework. Test assets and captured outcomes live outside the installable framework to make failures easier to reproduce.",
+    "highlights": [
+      "Versioned prompts, fixtures, and test runners",
+      "Normal, boundary, failure, and recovery test scenarios",
+      "Durable evidence linked to exact test and framework revisions"
+    ],
+    "audience": "Framework contributors and reviewers validating behavior before changes are accepted."
   },
   {
     "name": "NuGet Publication Cooldown POC",
     "category": ".NET / POC",
     "description": "Reproducible PowerShell experiments testing NuGet's .NET 11 RC2 package publication cooldown and its effects on automatic version selection versus explicit restore.",
     "url": "https://github.com/infoconex/nuget-publication-cooldown-poc",
-    "order": 90
+    "order": 90,
+    "overview": "A focused PowerShell proof of concept exploring package publication timing in NuGet and how version selection behaves during a publication cooldown.",
+    "highlights": [
+      "Reproducible experiments for .NET 11 RC2 packages",
+      "Compare automatic package version selection against explicit restore",
+      "Document observable effects of publication cooldown behavior"
+    ],
+    "audience": ".NET package authors and maintainers investigating restore behavior."
   }
 ]
