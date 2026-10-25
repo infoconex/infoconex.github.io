@@ -72,6 +72,8 @@ for path in ["/"] + [f"/projects/{slug}/" for slug in slugs]:
 ET.indent(root, space="  ")
 write(ROOT / "pages-sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n' + ET.tostring(root, encoding="unicode") + "\n")
 
+project_by_slug = dict(zip(slugs, projects))
+
 for project, slug in zip(projects, slugs):
     name, desc, category, github = (project[key] for key in ("name", "description", "category", "url"))
     canonical = f"{BASE}/projects/{slug}/"
@@ -111,6 +113,20 @@ for project, slug in zip(projects, slugs):
     )
     decision_items = "".join(f'<li><strong>{e(item)}</strong>{paragraphs(detailed_decisions[i]) if i < len(detailed_decisions) else str()}</li>' for i, item in enumerate(decisions))
     docs_aside = (f'<a href="{e(docs)}">Read documentation ↗</a>' if docs else "")
+    related_items = project.get("related", [])
+    article_items = project.get("articles", [])
+    related_cards = "".join(
+        f'<a class="case-resource-card" href="/projects/{e(item["slug"])}/"><h3>{e(project_by_slug[item["slug"]]["name"])} ↗</h3><span>{e(item["relationship"])}</span><p>{e(project_by_slug[item["slug"]]["description"])}</p></a>'
+        for item in related_items
+    )
+    article_cards = "".join(
+        f'<a class="case-resource-card" href="{e(item["url"])}"><h3>{e(item["title"])} ↗</h3><p>{e(item["description"])}</p></a>'
+        for item in article_items
+    )
+    articles_section = (f'<section class="case-section" id="articles"><span class="case-kicker">07 / Deeper reading</span><h2>Related articles</h2><p>Engineering context and lessons behind this project.</p><div class="case-resource-grid">{article_cards}</div></section>') if article_cards else ""
+    related_number = "08" if article_cards else "07"
+    related_section = (f'<section class="case-section" id="related"><span class="case-kicker">{related_number} / Explore further</span><h2>Related projects</h2><p>Explore other projects and how they connect to this work.</p><div class="case-resource-grid">{related_cards}</div></section>') if related_cards else ""
+    optional_toc = ('<a href="#articles">Related articles</a>' if article_cards else "") + ('<a href="#related">Related projects</a>' if related_cards else "")
     schema = {
         "@context": "https://schema.org", "@type": "WebPage",
         "name": name, "description": desc, "url": canonical,
@@ -139,9 +155,11 @@ for project, slug in zip(projects, slugs):
 <section class="case-section" id="workflow"><span class="case-kicker">04 / How</span><h2>How it works</h2><p>Key capabilities and concepts. See the project documentation or source code for implementation details.</p><div class="case-steps">{capabilities}</div></section>
 <section class="case-section" id="decisions"><span class="case-kicker">05 / Engineering perspective</span><h2>Design decisions that matter</h2><ul class="case-bullets">{decision_items}</ul></section>
 <section class="case-section" id="status"><span class="case-kicker">06 / Current state</span><h2>Explore the implementation</h2><p>{e(status)}</p>{status_details}<div class="case-related"><h3>Go deeper</h3><p>Use the project links to explore the source and available documentation.</p><div class="case-ctas">{links(primary_docs=True)}</div></div></section>
+{articles_section}
+{related_section}
 </article></div>
 <aside class="case-aside" aria-label="On this page"><h2>On this page</h2>
-<nav class="case-toc" aria-label="Project sections"><a href="#problem">The problem</a><a href="#solution">The solution</a><a href="#audience">Who it's for</a><a href="#workflow">How it works</a><a href="#decisions">Design decisions</a><a href="#status">Current state</a></nav>
+<nav class="case-toc" aria-label="Project sections"><a href="#problem">The problem</a><a href="#solution">The solution</a><a href="#audience">Who it's for</a><a href="#workflow">How it works</a><a href="#decisions">Design decisions</a><a href="#status">Current state</a>{optional_toc}</nav>
 <div class="case-rule"></div><div class="case-aside-links"><a href="{e(github)}">View source code ↗</a>{docs_aside}</div>
 <div class="case-rule"></div><nav class="case-aside-links" aria-label="Site navigation"><a href="/#projects">All projects</a><a href="https://github.com/infoconex">GitHub ↗</a></nav>
 </aside></div></main>
