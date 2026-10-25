@@ -305,6 +305,18 @@
         "slug": "ai-flywheel-cli-python",
         "relationship": "Python command-line implementation"
       }
+    ],
+    "articles": [
+      {
+        "title": "AI Flywheel Spec – From Agent Loop to Compounding System",
+        "url": "https://coding.infoconex.com/post/2026/07/15/ai-flywheel-spec-from-agent-loop-to-compounding-system",
+        "description": "Why ordinary agent loops do not necessarily compound, and how evidence, lifecycle stages, and governance turn execution into reusable learning."
+      },
+      {
+        "title": "From Specification to System: How the AI Flywheel Became Four Projects",
+        "url": "https://coding.infoconex.com/post/2026/09/03/from-specification-to-system-how-the-ai-flywheel-became-four-projects",
+        "description": "How the specification evolved into separate Framework, Testing, and CLI projects—and why their responsibilities are kept distinct."
+      }
     ]
   },
   {
