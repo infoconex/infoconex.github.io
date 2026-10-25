@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Check local SEO consistency without third-party packages or network access."""
 import json
+from datetime import date
 from urllib.parse import urlparse
 from html.parser import HTMLParser
 from pathlib import Path
@@ -30,6 +31,17 @@ for project in projects:
         assert all(isinstance(item.get(key), str) and item[key].strip() for key in ("title", "description")), f"Incomplete article for {slug}"
         assert item["url"] not in urls, f"Duplicate article for {slug}"
         urls.add(item["url"])
+
+# Optional lastmod values must be real ISO dates and must not be future-dated.
+for project in projects:
+    if "lastmod" in project:
+        value = project["lastmod"]
+        assert isinstance(value, str) and len(value) == 10, "lastmod must be YYYY-MM-DD"
+        try:
+            parsed_date = date.fromisoformat(value)
+        except ValueError as exc:
+            raise AssertionError(f"Invalid lastmod date: {value}") from exc
+        assert parsed_date <= date.today(), f"Future lastmod date: {value}"
 
 class Extract(HTMLParser):
     def __init__(self):
@@ -82,6 +94,16 @@ for url in paths[1:]:
 tree = ET.parse(ROOT / "pages-sitemap.xml")
 urls = [n.text for n in tree.findall(".//sm:loc", ns)]
 assert set(urls) == {BASE + p for p in paths}, "Page sitemap differs from project pages"
+for project in projects:
+    slug = project["url"].rstrip("/").split("/")[-1]
+    target = BASE + f"/projects/{slug}/"
+    matches = [node for node in tree.findall(".//sm:url", ns) if node.findtext("sm:loc", namespaces=ns) == target]
+    assert len(matches) == 1, f"Expected one sitemap entry for {slug}"
+    lastmod = matches[0].findtext("sm:lastmod", namespaces=ns)
+    assert lastmod == project.get("lastmod"), f"Incorrect lastmod for {slug}"
+home_entry = [node for node in tree.findall(".//sm:url", ns) if node.findtext("sm:loc", namespaces=ns) == BASE + "/"]
+assert len(home_entry) == 1 and home_entry[0].find("sm:lastmod", ns) is None, "Homepage must not have an unverified lastmod"
+
 index = ET.parse(ROOT / "sitemap.xml")
 indexes = [n.text for n in index.findall(".//sm:loc", ns)]
 assert BASE + "/pages-sitemap.xml" in indexes, "Missing local sitemap in sitemap index"
