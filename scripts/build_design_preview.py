@@ -84,7 +84,7 @@ def render(project, slug):
 <section class="hero"><div class="hero-copy"><p class="eyebrow">{esc(info["kind"])} · {esc(project["category"])}</p><h1>{esc(name)}</h1><p class="tagline">{esc(info["tagline"])}</p><p class="hero-description">{esc(project["seoDescription"])}</p></div><div class="hero-visual" aria-label="Illustration of project themes">{hero_visual}</div></section>
 <div class="layout"><main>{"".join(sections)}</main><aside class="sidebar" aria-label="Project context">{details_card}
 <div class="card"><h2>On this page</h2><nav class="toc">{toc}</nav></div>{articles_card}</aside></div></div>
-<footer class="footer"><div class="wrap"><span>© infoconex · Design experiment</span><a href="/projects/{esc(slug)}/">View current page ↗</a></div></footer></body></html>'''
+<footer class="footer"><div class="wrap"><span>© infoconex · Design experiment</span><a href="/projects/{esc(slug)}/">View current page ↗</a></div></footer><script src="../scrollspy.js" defer></script></body></html>'''
 
 def main():
     for slug in EXAMPLES:
