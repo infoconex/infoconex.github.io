@@ -4,7 +4,7 @@ A static, searchable directory of public engineering projects published at **htt
 
 ## Publishing
 
-In **Settings → Pages**, select **Deploy from a branch** and set **main / (root)**. This is a plain HTML site with no build dependencies.
+In **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions** (not “Deploy from a branch”). The `Build and deploy site` workflow generates, validates, and publishes the site from one run whenever `main` changes. Pull requests run build validation without deployment. No generated changes are pushed back to the repository.
 
 ## Pages and discovery
 
@@ -45,9 +45,9 @@ python scripts/build_projects.py
 python scripts/validate_seo.py
 ```
 
-The GitHub Actions workflow regenerates these files automatically after pushes to `main`, then commits any resulting changes. Pull requests must include generated files and pass validation. GitHub Actions needs permission to write repository contents; repository rules that forbid bot pushes may require a pull-request workflow instead.
+The GitHub Actions workflow generates these files in its checkout, validates them, then uploads the generated static site as a Pages artifact. **It does not commit generated files or trigger an additional push/deployment.** Pull requests validate without publishing. The site is deployed only after the build succeeds.
 
-**Do not edit generated cards, landing pages, or the page sitemap directly:** the next generation run will overwrite them. Keep project descriptions accurate and avoid claims of functionality that is still planned.
+**Do not edit generated cards, landing pages, or the page sitemap directly:** the deployment generator will overwrite them in the published artifact. Keep project descriptions accurate and avoid claims of functionality that is still planned.
 
 ## Search indexing
 
@@ -61,7 +61,8 @@ The sitemap URLs from other project sites are references, not proof of live depl
 ## Files
 
 - `index.html`, `styles.css`, `script.js` — homepage and interactive filtering
-- `projects.json` — authoritative project catalog, ordering, and descriptions\n- `scripts/build_projects.py` — static HTML, JSON-LD, and sitemap generator
+- `projects.json` — authoritative project catalog, ordering, and descriptions
+- `scripts/build_projects.py` — static HTML, JSON-LD, and sitemap generator
 - `projects/*/index.html` — search-engine-readable project detail pages
 - `pages-sitemap.xml` — local page URLs
 - `sitemap.xml` — aggregate sitemap index
