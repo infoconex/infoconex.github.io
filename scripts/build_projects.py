@@ -109,7 +109,7 @@ for project, slug in zip(projects, slugs):
         f'<div class="case-step"><span class="case-step-number">{i}</span><div><h3>{e(item)}</h3>{paragraphs(detailed_steps[i - 1]) if i <= len(detailed_steps) else ""}</div></div>'
         for i, item in enumerate(highlights, 1)
     )
-    decision_items = "".join(f"<li><strong>{e(item)}</strong>{paragraphs(detailed_decisions[i]) if i < len(detailed_decisions) else \"\"}</li>" for i, item in enumerate(decisions))
+    decision_items = "".join(f'<li><strong>{e(item)}</strong>{paragraphs(detailed_decisions[i]) if i < len(detailed_decisions) else str()}</li>' for i, item in enumerate(decisions))
     docs_aside = (f'<a href="{e(docs)}">Read documentation ↗</a>' if docs else "")
     schema = {
         "@context": "https://schema.org", "@type": "WebPage",
