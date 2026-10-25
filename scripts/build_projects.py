@@ -199,6 +199,14 @@ for project, slug in zip(projects, slugs):
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     }})(window, document, "clarity", "script", "z340egz0ho");
 </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QQP7ZQK7ZK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){{dataLayer.push(arguments);}}
+  gtag('js', new Date());
+  gtag('config', 'G-QQP7ZQK7ZK');
+</script>
 </head><body>
 <header class="site-header"><div class="container header-inner"><a class="brand" href="/"><span class="brand-mark">i<span>.</span></span> infoconex</a><nav aria-label="Main navigation"><a href="/#projects">All projects</a><a href="https://github.com/infoconex">GitHub ↗</a></nav></div></header>
 <main class="case-shell"><div class="container"><nav class="case-breadcrumb" aria-label="Breadcrumb"><a href="/#projects">All projects</a><span> / </span>{e(name)}</nav><div class="case-columns"><div class="case-main">
