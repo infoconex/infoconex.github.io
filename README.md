@@ -43,9 +43,13 @@ For project pages, maintain the optional `lastmod` field in `projects.json` as a
 To regenerate and validate locally:
 
 ```bash
+python -m pip install 'Pillow>=11,<13'
 python scripts/build_projects.py
+python scripts/build_social_images.py
 python scripts/validate_seo.py
 ```
+
+Each project has a concise, unique `seoDescription` in `projects.json` for HTML, Open Graph, and Twitter metadata. Visible project descriptions stay separate. Titles use `Project Name | infoconex`. The build generates 1200×630 PNG previews in `assets/social/`, adds BreadcrumbList JSON-LD, and validates the expected metadata and image files. Social images use Pillow and DejaVu Sans fonts.
 
 The GitHub Actions workflow generates these files in its checkout, validates them, then uploads the generated static site as a Pages artifact. **It does not commit generated files or trigger an additional push/deployment.** Pull requests validate without publishing. The site is deployed only after the build succeeds.
 
