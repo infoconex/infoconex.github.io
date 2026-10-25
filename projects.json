@@ -62,12 +62,6 @@
         "For exact current usage, prerequisites, and release status, consult the source repository and published documentation."
       ]
     },
-    "related": [
-      {
-        "slug": "isolated-dotnet-sdk",
-        "relationship": "Featured engineering topic"
-      }
-    ],
     "articles": [
       {
         "title": "Out With the Old, In With the New: Rebuilding Coding",
