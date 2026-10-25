@@ -78,7 +78,7 @@
     "description": "Install, audit, verify, and remove exact .NET SDK versions in a user-owned directory without changing system-wide SDKs or PATH. Supports PowerShell on Windows and Bash on Linux/macOS.",
     "url": "https://github.com/infoconex/isolated-dotnet-sdk",
     "order": 20,
-    "website": "https://projects.infoconex.com/isolated-dotnet-sdk/",
+    "website": "https://isolated-dotnet-sdk.infoconex.com/",
     "overview": "Use exact .NET SDK versions without modifying the machine-wide installation or PATH. The project focuses on repeatable local SDK management across development and automation environments.",
     "highlights": [
       "Install and remove specific SDK versions in a user-owned directory",
