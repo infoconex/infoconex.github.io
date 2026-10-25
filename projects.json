@@ -261,7 +261,8 @@
       }
     ],
     "lastmod": "2026-10-24",
-    "seoDescription": "Copy GitHub repositories with PowerShell using clean snapshots or full history, preview plans, and safety checks."
+    "seoDescription": "Copy GitHub repositories with PowerShell using clean snapshots or full history, preview plans, and safety checks.",
+    "socialSource": "https://raw.githubusercontent.com/infoconex/copy-github-repo/main/assets/images/product_banner.png"
   },
   {
     "name": "AI Flywheel Specification",
@@ -358,7 +359,8 @@
       }
     ],
     "lastmod": "2026-10-24",
-    "seoDescription": "An evidence-driven AI operating model for governed execution, validated improvement, and reusable learning."
+    "seoDescription": "An evidence-driven AI operating model for governed execution, validated improvement, and reusable learning.",
+    "socialSource": "https://raw.githubusercontent.com/infoconex/ai-flywheel-spec/main/docs/assets/Infoconex-ai-flywheel-banner.png"
   },
   {
     "name": "AI Flywheel Framework",
