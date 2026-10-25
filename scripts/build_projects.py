@@ -78,21 +78,36 @@ for project, slug in zip(projects, slugs):
     docs = project.get("website")
     if docs:
         assert urlparse(docs).scheme == "https" and urlparse(docs).netloc, "Invalid website URL"
-    overview = project.get("overview", desc)
+
+    study = project.get("caseStudy", {})
+    problem = study.get("problem", project.get("overview", desc))
+    solution = study.get("solution", project.get("overview", desc))
+    decisions = study.get("decisions", project.get("highlights", []))
+    status = study.get("status", "Consult the repository for the latest implementation status.")
+    audience = project.get("audience", "Developers interested in this project.")
     highlights = project.get("highlights", [])
-    audience = project.get("audience")
-    assert isinstance(overview, str) and overview.strip()
-    assert isinstance(highlights, list) and all(isinstance(item, str) and item.strip() for item in highlights)
-    assert audience is None or isinstance(audience, str)
-    highlights_html = "".join(f"<li>{e(item)}</li>" for item in highlights)
-    overview_html = f'<section aria-labelledby="overview-title"><h2 id="overview-title">Overview</h2><p>{e(overview)}</p></section>'
-    highlights_section = (f'<section aria-labelledby="capabilities-title"><h2 id="capabilities-title">Key capabilities</h2><ul class="detail-highlights">{highlights_html}</ul></section>') if highlights else ""
-    audience_section = (f'<section aria-labelledby="audience-title"><h2 id="audience-title">Who it is for</h2><p>{e(audience)}</p></section>') if audience else ""
-    schema = {"@context": "https://schema.org", "@type": "WebPage", "name": name,
-              "description": desc, "url": canonical,
-              "isPartOf": {"@type": "WebSite", "name": "infoconex", "url": BASE + "/"},
-              "about": {"@type": "SoftwareSourceCode", "name": name, "description": desc, "codeRepository": github}}
-    extra = f'<a class="primary-link secondary-link" href="{e(docs)}">Read published documentation ↗</a>' if docs else ""
+    assert all(isinstance(item, str) for item in highlights + decisions)
+
+    def links(primary_docs=False):
+        source_link = f'<a class="case-btn case-primary" href="{e(github)}">View source code ↗</a>'
+        docs_link = (f'<a class="case-btn case-outline" href="{e(docs)}">Read documentation ↗</a>' if docs else "")
+        if primary_docs and docs:
+            return (f'<a class="case-btn case-primary" href="{e(docs)}">Read documentation ↗</a>'
+                    f'<a class="case-btn case-outline" href="{e(github)}">View source code ↗</a>')
+        return source_link + docs_link
+
+    capabilities = "".join(
+        f'<div class="case-step"><span class="case-step-number">{i}</span><div><h3>{e(item)}</h3></div></div>'
+        for i, item in enumerate(highlights, 1)
+    )
+    decision_items = "".join(f"<li>{e(item)}</li>" for item in decisions)
+    docs_aside = (f'<a href="{e(docs)}">Read documentation ↗</a>' if docs else "")
+    schema = {
+        "@context": "https://schema.org", "@type": "WebPage",
+        "name": name, "description": desc, "url": canonical,
+        "isPartOf": {"@type": "WebSite", "name": "infoconex", "url": BASE + "/"},
+        "about": {"@type": "SoftwareSourceCode", "name": name, "description": desc, "codeRepository": github}
+    }
     content = f'''<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -103,14 +118,24 @@ for project, slug in zip(projects, slugs):
 <title>{e(name)} | infoconex open-source projects</title><script type="application/ld+json">{json.dumps(schema, ensure_ascii=False).replace("<", "\\u003c")}</script>
 </head><body>
 <header class="site-header"><div class="container header-inner"><a class="brand" href="/"><span class="brand-mark">i<span>.</span></span> infoconex</a><nav aria-label="Main navigation"><a href="/#projects">All projects</a><a href="https://github.com/infoconex">GitHub ↗</a></nav></div></header>
-<main class="container detail-page">
-<p class="eyebrow">{e(category)}</p><h1>{e(name)}</h1><p class="intro">{e(desc)}</p>
-{overview_html}
-{highlights_section}
-{audience_section}
-<section aria-labelledby="explore-title"><h2 id="explore-title">Explore this project</h2><p>Visit the repository for the README, source code, and current implementation status.</p><div class="detail-links"><a class="primary-link" href="{e(github)}">View GitHub repository ↗</a>{extra}</div></section>
-<p class="return-link"><a href="/#projects">← Back to all projects</a></p></main>
-<footer class="site-footer"><div class="container footer-inner"><span>© infoconex</span><div><a href="https://github.com/infoconex">GitHub</a><a href="/sitemap.xml">Sitemap</a></div></div></footer>
+<main class="case-shell"><div class="container case-columns"><div class="case-main">
+<section class="case-hero" aria-labelledby="project-title">
+<p class="eyebrow">{e(category)}</p><h1 id="project-title">{e(name)}</h1><p class="case-lead">{e(desc)}</p>
+<div class="case-ctas">{links()}</div>
+</section>
+<article>
+<section class="case-section" id="problem"><span class="case-kicker">01 / Why</span><h2>The problem</h2><p>{e(problem)}</p></section>
+<section class="case-section" id="solution"><span class="case-kicker">02 / What</span><h2>The solution</h2><p>{e(solution)}</p></section>
+<section class="case-section" id="audience"><span class="case-kicker">03 / Who</span><h2>Who it's for</h2><p>{e(audience)}</p></section>
+<section class="case-section" id="workflow"><span class="case-kicker">04 / How</span><h2>How it works</h2><p>Key capabilities and concepts. See the project documentation or source code for implementation details.</p><div class="case-steps">{capabilities}</div></section>
+<section class="case-section" id="decisions"><span class="case-kicker">05 / Engineering perspective</span><h2>Design decisions that matter</h2><ul class="case-bullets">{decision_items}</ul></section>
+<section class="case-section" id="status"><span class="case-kicker">06 / Current state</span><h2>Explore the implementation</h2><p>{e(status)}</p><div class="case-related"><h3>Go deeper</h3><p>Use the project links to explore the source and available documentation.</p><div class="case-ctas">{links(primary_docs=True)}</div></div></section>
+</article></div>
+<aside class="case-aside" aria-label="On this page"><h2>On this page</h2>
+<nav class="case-toc" aria-label="Project sections"><a href="#problem">The problem</a><a href="#solution">The solution</a><a href="#audience">Who it's for</a><a href="#workflow">How it works</a><a href="#decisions">Design decisions</a><a href="#status">Current state</a></nav>
+<div class="case-rule"></div><div class="case-aside-links"><a href="{e(github)}">View source code ↗</a>{docs_aside}</div>
+</aside></div></main>
+<footer class="site-footer"><div class="container footer-inner"><span>© infoconex</span><nav aria-label="Footer navigation"><a href="/#projects">All projects</a><a href="https://github.com/infoconex">GitHub ↗</a></nav></div></footer>
 </body></html>'''
     write(ROOT / "projects" / slug / "index.html", content)
 print(f"Generated homepage, sitemap and {len(projects)} project pages.")
