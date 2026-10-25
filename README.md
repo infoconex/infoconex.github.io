@@ -1,6 +1,10 @@
-# infoconex.github.io
+# infoconex.github.io (Projects Site)
 
-A static, searchable directory of public engineering projects published at **https://infoconex.github.io/**.
+A static, searchable directory of public engineering projects published at **https://projects.infoconex.com/**.
+
+## Custom domain
+
+The GitHub Pages domain is `projects.infoconex.com`. Set the custom domain in Settings → Pages, and point the DNS CNAME for `projects` to `infoconex.github.io`. The repository root `CNAME` is included in the Pages deployment artifact.
 
 ## Publishing
 
@@ -59,7 +63,7 @@ The GitHub Actions workflow generates these files in its checkout, validates the
 
 1. Enable GitHub Pages and confirm the published site works.
 2. Verify ownership in [Google Search Console](https://search.google.com/search-console/).
-3. Submit `https://infoconex.github.io/sitemap.xml`.
+3. Submit `https://projects.infoconex.com/sitemap.xml`.
 4. Check coverage and indexing reports after Google crawls the site. Verification and submission must be completed in the appropriate Google account.
 
 The sitemap URLs from other project sites are references, not proof of live deployment. Check their live status independently. Avoid submitting unverified links to search engines.
