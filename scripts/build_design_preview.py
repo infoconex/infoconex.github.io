@@ -37,6 +37,12 @@ def render(project, slug):
     code_cta = external_link(github, "View source code ↗", "side-action primary")
     doc_cta = external_link(docs, "Read documentation ↗" if slug != "coding-blog" else "Visit publication ↗", "side-action secondary") if docs else ""
     actions = code_cta + doc_cta
+    hero_visuals = {
+        "isolated-dotnet-sdk": '<div class="visual-window"><div class="window-dots"><i></i><i></i><i></i></div><div class="visual-rows"><span>✓ Install exact SDK versions</span><span>✓ Verify installation</span><span>✓ Audit SDK inventory</span><span>✓ Remove when finished</span></div></div>',
+        "ai-flywheel-spec": '<div class="visual-window"><div class="visual-heading">EVIDENCE-DRIVEN LIFECYCLE</div><div class="visual-rows"><span>01 Execute and observe</span><span>02 Evaluate evidence</span><span>03 Validate improvement</span><span>04 Reuse supported learning</span></div></div>',
+        "coding-blog": '<div class="visual-window editorial"><div class="visual-heading">FIELD NOTES / ENGINEERING</div><div class="visual-rows"><span>Architecture &amp; design</span><span>.NET &amp; developer tooling</span><span>Experiments &amp; lessons</span></div></div>',
+    }
+    hero_visual = hero_visuals[slug]
     stages = [
       ("problem", "01 / Why", "The problem", study.get("problem"), study.get("problemDetails", [])),
       ("solution", "02 / What", "The solution", study.get("solution"), study.get("solutionDetails", [])),
@@ -75,7 +81,7 @@ def render(project, slug):
 <div class="notice"><div class="wrap"><span>Preview C · Unindexed design experiment</span><nav><a href="/projects/{esc(slug)}/">Existing page</a><a href="/design-preview/modern-case-study/">Other examples</a></nav></div></div>
 <header class="header"><div class="wrap"><a class="brand" href="/"><span class="logo">i.</span> infoconex</a><nav><a href="/#projects">All projects</a>{external_link("https://github.com/infoconex","GitHub ↗")}</nav></div></header>
 <div class="wrap"><div class="crumb"><a href="/#projects">All projects</a><span> / </span>{esc(name)}</div>
-<section class="hero"><p class="eyebrow">{esc(info["kind"])} · {esc(project["category"])}</p><h1>{esc(name)}</h1><p class="tagline">{esc(info["tagline"])}</p><p class="hero-description">{esc(project["seoDescription"])}</p></section>
+<section class="hero"><div class="hero-copy"><p class="eyebrow">{esc(info["kind"])} · {esc(project["category"])}</p><h1>{esc(name)}</h1><p class="tagline">{esc(info["tagline"])}</p><p class="hero-description">{esc(project["seoDescription"])}</p></div><div class="hero-visual" aria-label="Illustration of project themes">{hero_visual}</div></section>
 <div class="layout"><main>{"".join(sections)}</main><aside class="sidebar" aria-label="Project context">{details_card}
 <div class="card"><h2>On this page</h2><nav class="toc">{toc}</nav></div>{articles_card}</aside></div></div>
 <footer class="footer"><div class="wrap"><span>© infoconex · Design experiment</span><a href="/projects/{esc(slug)}/">View current page ↗</a></div></footer></body></html>'''
