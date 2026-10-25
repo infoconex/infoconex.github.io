@@ -90,6 +90,20 @@ def main():
     index = OUT / "index.html"
     links = "".join(f'<li><a href="./{s}/">{esc(by_slug[s]["name"])}</a></li>' for s in EXAMPLES)
     index.write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><title>Preview C examples · infoconex</title><link rel="stylesheet" href="preview-c.css"></head><body><div class="wrap"><div class="directory"><p class="eyebrow">Design Preview C · Not indexed</p><h1>Modern Engineering Case Study</h1><p>Three project types generated from the same data-driven layout. Production pages are unchanged.</p><ul>{links}</ul><p><a href="/#projects">Return to existing projects ↗</a></p></div></div></body></html>',encoding="utf-8")
-    print("Generated Preview C examples:",", ".join(EXAMPLES))
+    for slug in EXAMPLES:
+        page = (OUT / slug / "index.html").read_text(encoding="utf-8")
+        project = by_slug[slug]
+        assert 'name="robots" content="noindex,nofollow,noarchive"' in page
+        assert page.count('class="btn primary"') == 1, "Exactly one primary CTA required"
+        assert page.count('View source code ↗') == 1, "Source action repeated"
+        assert ('Read documentation ↗' in page) == bool(project.get("website") and slug != "coding-blog")
+        assert ('Visit publication ↗' in page) == (slug == "coding-blog")
+        assert ('id="related"' in page) == bool(project.get("related")), "Related project section must be conditional"
+        assert ('Related articles</h2>' in page) == bool(project.get("articles")), "Articles card must be conditional"
+        for item in project.get("articles", []):
+            assert esc(item["url"]) in page, "Missing article"
+        for item in project.get("related", []):
+            assert f'/projects/{item["slug"]}/' in page, "Missing related project"
+    print("Generated and checked Preview C examples:",", ".join(EXAMPLES))
 if __name__=="__main__":
     main()
