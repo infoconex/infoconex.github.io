@@ -23,6 +23,10 @@ jobs:
           python-version: '3.12'
       - name: Generate static project pages and sitemap
         run: python scripts/build_projects.py
+      - name: Install social image generator dependency
+        run: python -m pip install 'Pillow>=11,<13'
+      - name: Generate social sharing images
+        run: python scripts/build_social_images.py
       - name: Validate SEO and internal links
         run: python scripts/validate_seo.py
       - name: Stage published site
@@ -30,6 +34,7 @@ jobs:
           mkdir -p _site
           cp index.html styles.css script.js projects.json favicon.svg robots.txt sitemap.xml pages-sitemap.xml _site/
           cp -R projects _site/projects
+          cp -R assets _site/assets
           touch _site/.nojekyll
       - name: Upload GitHub Pages artifact
         if: github.event_name != 'pull_request'
