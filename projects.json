@@ -12,7 +12,16 @@
       "Hands-on .NET and developer-tooling notes",
       "Technical experiments and lessons learned"
     ],
-    "audience": "Engineers looking for practical write-ups and worked examples."
+    "audience": "Engineers looking for practical write-ups and worked examples.",
+    "caseStudy": {
+      "problem": "Useful engineering knowledge often gets lost between implementation, experimentation, and the next project.",
+      "solution": "Publish concrete explanations of architecture, .NET tooling, development practices, and lessons learned.",
+      "decisions": [
+        "Prioritize specific engineering examples over broad announcements.",
+        "Keep writing connected to actual experiments and implementation work."
+      ],
+      "status": "The published blog is the source for current articles, topics, and updates."
+    }
   },
   {
     "name": "Isolated .NET SDK",
@@ -27,7 +36,17 @@
       "Audit and verify the installed SDK inventory",
       "PowerShell support on Windows and Bash support on Linux and macOS"
     ],
-    "audience": "Developers and CI maintainers who need predictable SDK versions without system-wide changes."
+    "audience": "Developers and CI maintainers who need predictable SDK versions without system-wide changes.",
+    "caseStudy": {
+      "problem": "Different projects can need exact .NET SDK versions without changing the SDK configuration of an entire machine.",
+      "solution": "Manage selected SDK versions within a user-owned directory, leaving system-wide SDKs and PATH untouched.",
+      "decisions": [
+        "Isolation over global machine changes.",
+        "Explicit, verifiable SDK versions.",
+        "PowerShell on Windows and Bash on Linux/macOS."
+      ],
+      "status": "Installation, audit, verification, and removal are documented; consult the repository and published docs for current examples and limitations."
+    }
   },
   {
     "name": "Copy GitHub Repo",
@@ -42,7 +61,17 @@
       "Preview plans before making repository changes",
       "Built-in checks help avoid unsafe copy operations"
     ],
-    "audience": "Repository maintainers migrating projects or creating controlled copies."
+    "audience": "Repository maintainers migrating projects or creating controlled copies.",
+    "caseStudy": {
+      "problem": "Repository copies involve a choice between starting fresh and retaining complete history, with risks around unexpected changes.",
+      "solution": "Offer deliberate Snapshot and FullHistory modes alongside preview plans and safety checks.",
+      "decisions": [
+        "Make history preservation an explicit choice.",
+        "Expose the intended operation before execution.",
+        "Prefer safety checks to surprising repository changes."
+      ],
+      "status": "The repository and published documentation describe available commands, requirements, and current behavior."
+    }
   },
   {
     "name": "AI Flywheel Specification",
@@ -57,7 +86,17 @@
       "Distinguishes validated learning from unverified observations",
       "Establishes governance and traceability for continued operation"
     ],
-    "audience": "Teams designing evidence-driven, repeatable AI-assisted engineering processes."
+    "audience": "Teams designing evidence-driven, repeatable AI-assisted engineering processes.",
+    "caseStudy": {
+      "problem": "AI-assisted work can repeat tasks without accumulating verified learning or clearly governing what happens next.",
+      "solution": "Define a lifecycle that connects execution, observation, evidence, evaluation, validated improvement, and reuse.",
+      "decisions": [
+        "Treat evidence as distinct from assumption.",
+        "Make governance and traceability part of the operating model.",
+        "Define the normative rules separately from implementation."
+      ],
+      "status": "The specification repository and its published documentation are authoritative for current requirements and revisions."
+    }
   },
   {
     "name": "AI Flywheel Framework",
@@ -71,7 +110,17 @@
       "Provides onboarding, bootstrap missions, and goal records",
       "Captures lifecycle state, evidence, learning, and governance"
     ],
-    "audience": "Repository owners adopting the AI Flywheel operating model."
+    "audience": "Repository owners adopting the AI Flywheel operating model.",
+    "caseStudy": {
+      "problem": "An operating specification alone does not establish a repeatable, repository-local way to work.",
+      "solution": "Provide an installable .flywheel structure, manifest-driven startup, bootstrap missions, lifecycle records, and governance guidance.",
+      "decisions": [
+        "Use the manifest as the authoritative entry point.",
+        "Remain independent of programming language and toolchain.",
+        "Support manual operation before repository-specific tools are built."
+      ],
+      "status": "The framework repository contains the current installation model, operating artifacts, and onboarding guidance."
+    }
   },
   {
     "name": "AI Flywheel CLI",
@@ -85,7 +134,17 @@
       "Planned mission and goal management, validation, and upgrades",
       "Designed for cross-platform use and machine-readable automation output"
     ],
-    "audience": "Developers planning to operate Flywheel workflows from a terminal or CI pipeline."
+    "audience": "Developers planning to operate Flywheel workflows from a terminal or CI pipeline.",
+    "caseStudy": {
+      "problem": "Operating the AI Flywheel manually across repositories can make common lifecycle tasks inconsistent.",
+      "solution": "Develop a cross-platform .NET command-line interface for installation, missions, goals, validation, and upgrades.",
+      "decisions": [
+        "Plan consistent, script-friendly commands.",
+        "Keep the command surface cross-platform.",
+        "Preserve repository-specific information during planned upgrades."
+      ],
+      "status": "Under active development. Commands and behavior described as planned should not be treated as shipped until verified in the repository."
+    }
   },
   {
     "name": "AI Flywheel CLI Python",
@@ -99,7 +158,17 @@
       "Support installation and lifecycle operations",
       "Use structured command results for automation and diagnostics"
     ],
-    "audience": "Python users and automation authors integrating AI Flywheel operations."
+    "audience": "Python users and automation authors integrating AI Flywheel operations.",
+    "caseStudy": {
+      "problem": "Python workflows need a practical way to inspect and operate local Flywheel artifacts while retaining safeguards.",
+      "solution": "Provide a Python 3.11+ CLI with inspection, validation, installation, and lifecycle-oriented commands.",
+      "decisions": [
+        "Use structured command results for automation.",
+        "Validate artifacts before relying on them.",
+        "Keep local operations explicit and safeguarded."
+      ],
+      "status": "Consult the repository for current commands, supported operations, and limitations."
+    }
   },
   {
     "name": "AI Flywheel Framework Testing",
@@ -113,7 +182,17 @@
       "Normal, boundary, failure, and recovery test scenarios",
       "Durable evidence linked to exact test and framework revisions"
     ],
-    "audience": "Framework contributors and reviewers validating behavior before changes are accepted."
+    "audience": "Framework contributors and reviewers validating behavior before changes are accepted.",
+    "caseStudy": {
+      "problem": "Changes to an AI operating framework need repeatable tests and evidence, not just informal prompts and impressions.",
+      "solution": "Keep versioned prompts, fixtures, runners, and captured evidence in a separate testing repository.",
+      "decisions": [
+        "Separate test assets from the installable framework.",
+        "Tie outcomes to immutable source revisions.",
+        "Include boundary, failure, and recovery scenarios."
+      ],
+      "status": "The testing repository records current fixtures, test methods, and published evidence."
+    }
   },
   {
     "name": "NuGet Publication Cooldown POC",
@@ -127,6 +206,16 @@
       "Compare automatic package version selection against explicit restore",
       "Document observable effects of publication cooldown behavior"
     ],
-    "audience": ".NET package authors and maintainers investigating restore behavior."
+    "audience": ".NET package authors and maintainers investigating restore behavior.",
+    "caseStudy": {
+      "problem": "Package publication cooldowns can produce confusing differences between implicit version resolution and explicit package restore.",
+      "solution": "Use reproducible PowerShell experiments to examine .NET 11 RC2 package availability and restore behavior.",
+      "decisions": [
+        "Compare automatic version selection with explicit restore.",
+        "Keep the experiment reproducible.",
+        "Report observations without overstating general conclusions."
+      ],
+      "status": "This is a proof of concept; see the repository for scripts, observations, and conclusions."
+    }
   }
 ]
