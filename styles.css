@@ -84,3 +84,6 @@
 @media(max-width:860px){.case-columns{grid-template-columns:1fr;gap:24px}.case-aside{position:static;order:0;grid-template-columns:repeat(2,minmax(0,1fr))}.case-toc{grid-template-columns:1fr}.case-hero{padding:26px}}
 @media(max-width:560px){.case-hero{padding:23px}.case-hero-visual{grid-template-columns:1fr}.case-resource-grid{grid-template-columns:1fr}.case-aside{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.case-toc a{transition:none}}
+
+/* Section numbers in the production table of contents */
+.case-toc a{display:flex;align-items:baseline;gap:12px}.case-toc-number{flex:0 0 21px;font-size:.78rem;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:750}.case-toc a.active .case-toc-number,.case-toc a[aria-current="location"] .case-toc-number{color:#d4efff}
