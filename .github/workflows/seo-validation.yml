@@ -1,57 +1,53 @@
-name: Build and validate project SEO
+name: Build and deploy site
 
 on:
   push:
     branches: [main]
-    paths:
-      - projects.json
-      - scripts/build_projects.py
-      - scripts/validate_seo.py
-      - .github/workflows/seo-validation.yml
   pull_request:
-    paths:
-      - projects.json
-      - scripts/build_projects.py
-      - scripts/validate_seo.py
-      - .github/workflows/seo-validation.yml
-      - index.html
-      - pages-sitemap.xml
-      - projects/**
   workflow_dispatch:
 
 concurrency:
-  group: seo-${{ github.workflow }}-${{ github.ref }}
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
   contents: read
 
 jobs:
-  build-check:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          persist-credentials: true
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Generate crawlable pages from projects.json
+      - name: Generate static project pages and sitemap
         run: python scripts/build_projects.py
-      - name: Validate metadata, internal links and sitemaps
+      - name: Validate SEO and internal links
         run: python scripts/validate_seo.py
-      - name: Ensure pull requests commit generated files
-        if: github.event_name == 'pull_request'
-        run: git diff --exit-code -- index.html pages-sitemap.xml projects/
-      - name: Commit generated pages on main
-        if: github.event_name != 'pull_request'
+      - name: Stage published site
         run: |
-          if ! git diff --quiet -- index.html pages-sitemap.xml projects/; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add index.html pages-sitemap.xml projects/
-            git commit -m "Regenerate project pages and sitemap from projects.json"
-            git push
-          fi
+          mkdir -p _site
+          cp index.html styles.css script.js projects.json favicon.svg robots.txt sitemap.xml pages-sitemap.xml _site/
+          cp -R projects _site/projects
+          touch _site/.nojekyll
+      - name: Upload GitHub Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
