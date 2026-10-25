@@ -96,11 +96,20 @@ for project, slug in zip(projects, slugs):
                     f'<a class="case-btn case-outline" href="{e(github)}">View source code ↗</a>')
         return source_link + docs_link
 
+    def paragraphs(values):
+        return "".join(f"<p>{e(value)}</p>" for value in values if value)
+
+    problem_details = paragraphs(study.get("problemDetails", []))
+    solution_details = paragraphs(study.get("solutionDetails", []))
+    audience_details = paragraphs(study.get("audienceDetails", []))
+    status_details = paragraphs(study.get("statusDetails", []))
+    detailed_steps = study.get("workflowDetails", [])
+    detailed_decisions = study.get("decisionDetails", [])
     capabilities = "".join(
-        f'<div class="case-step"><span class="case-step-number">{i}</span><div><h3>{e(item)}</h3></div></div>'
+        f'<div class="case-step"><span class="case-step-number">{i}</span><div><h3>{e(item)}</h3>{paragraphs(detailed_steps[i - 1]) if i <= len(detailed_steps) else ""}</div></div>'
         for i, item in enumerate(highlights, 1)
     )
-    decision_items = "".join(f"<li>{e(item)}</li>" for item in decisions)
+    decision_items = "".join(f"<li><strong>{e(item)}</strong>{paragraphs(detailed_decisions[i]) if i < len(detailed_decisions) else \"\"}</li>" for i, item in enumerate(decisions))
     docs_aside = (f'<a href="{e(docs)}">Read documentation ↗</a>' if docs else "")
     schema = {
         "@context": "https://schema.org", "@type": "WebPage",
@@ -124,12 +133,12 @@ for project, slug in zip(projects, slugs):
 <div class="case-ctas">{links()}</div>
 </section>
 <article>
-<section class="case-section" id="problem"><span class="case-kicker">01 / Why</span><h2>The problem</h2><p>{e(problem)}</p></section>
-<section class="case-section" id="solution"><span class="case-kicker">02 / What</span><h2>The solution</h2><p>{e(solution)}</p></section>
-<section class="case-section" id="audience"><span class="case-kicker">03 / Who</span><h2>Who it's for</h2><p>{e(audience)}</p></section>
+<section class="case-section" id="problem"><span class="case-kicker">01 / Why</span><h2>The problem</h2><p>{e(problem)}</p>{problem_details}</section>
+<section class="case-section" id="solution"><span class="case-kicker">02 / What</span><h2>The solution</h2><p>{e(solution)}</p>{solution_details}</section>
+<section class="case-section" id="audience"><span class="case-kicker">03 / Who</span><h2>Who it's for</h2><p>{e(audience)}</p>{audience_details}</section>
 <section class="case-section" id="workflow"><span class="case-kicker">04 / How</span><h2>How it works</h2><p>Key capabilities and concepts. See the project documentation or source code for implementation details.</p><div class="case-steps">{capabilities}</div></section>
 <section class="case-section" id="decisions"><span class="case-kicker">05 / Engineering perspective</span><h2>Design decisions that matter</h2><ul class="case-bullets">{decision_items}</ul></section>
-<section class="case-section" id="status"><span class="case-kicker">06 / Current state</span><h2>Explore the implementation</h2><p>{e(status)}</p><div class="case-related"><h3>Go deeper</h3><p>Use the project links to explore the source and available documentation.</p><div class="case-ctas">{links(primary_docs=True)}</div></div></section>
+<section class="case-section" id="status"><span class="case-kicker">06 / Current state</span><h2>Explore the implementation</h2><p>{e(status)}</p>{status_details}<div class="case-related"><h3>Go deeper</h3><p>Use the project links to explore the source and available documentation.</p><div class="case-ctas">{links(primary_docs=True)}</div></div></section>
 </article></div>
 <aside class="case-aside" aria-label="On this page"><h2>On this page</h2>
 <nav class="case-toc" aria-label="Project sections"><a href="#problem">The problem</a><a href="#solution">The solution</a><a href="#audience">Who it's for</a><a href="#workflow">How it works</a><a href="#decisions">Design decisions</a><a href="#status">Current state</a></nav>
