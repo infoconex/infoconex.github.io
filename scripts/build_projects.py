@@ -117,13 +117,14 @@ for project, slug in zip(projects, slugs):
     highlights = project.get("highlights", [])
     assert all(isinstance(item, str) for item in highlights + decisions)
 
-    def links(primary_docs=False):
-        source_link = f'<a class="case-btn case-primary" href="{e(github)}">View source code ↗</a>'
-        docs_link = (f'<a class="case-btn case-outline" href="{e(docs)}">Read documentation ↗</a>' if docs else "")
-        if primary_docs and docs:
-            return (f'<a class="case-btn case-primary" href="{e(docs)}">Read documentation ↗</a>'
-                    f'<a class="case-btn case-outline" href="{e(github)}">View source code ↗</a>')
-        return source_link + docs_link
+    source_action = f'<a class="case-side-action case-primary" href="{e(github)}">View source code ↗</a>'
+    documentation_action = (f'<a class="case-side-action case-outline" href="{e(docs)}">{"Visit publication" if slug == "coding-blog" else "Read documentation"} ↗</a>' if docs else "")
+    actions = source_action + documentation_action
+    kind = "Technical publication" if slug == "coding-blog" else ("Methodology / specification" if slug == "ai-flywheel-spec" else "Engineering project")
+    tagline = {"isolated-dotnet-sdk": "Exact SDK versions. No system-wide changes.", "ai-flywheel-spec": "A loop repeats. A flywheel compounds.", "coding-blog": "Practical engineering, documented."}.get(slug, project.get("overview", desc))
+    visual = "".join(f'<span>{e(line)}</span>' for line in project.get("highlights", [])[:3])
+    platform_info = {"isolated-dotnet-sdk": [("Interfaces", "PowerShell · Bash"), ("Platforms", "Windows · Linux · macOS")], "copy-github-repo": [("Interface", "PowerShell")], "ai-flywheel-cli": [("Interface", ".NET CLI")], "ai-flywheel-cli-python": [("Interface", "Python CLI")]}.get(slug, [])
+    detail_rows = "".join(f'<div class="case-detail"><dt>{e(key)}</dt><dd>{e(value)}</dd></div>' for key,value in [("Category",category)] + platform_info)
 
     def paragraphs(values):
         return "".join(f"<p>{e(value)}</p>" for value in values if value)
@@ -176,10 +177,10 @@ for project, slug in zip(projects, slugs):
 <title>{e(seo_title)}</title><script type="application/ld+json">{json.dumps(schema, ensure_ascii=False).replace("<", "\\u003c")}</script>
 </head><body>
 <header class="site-header"><div class="container header-inner"><a class="brand" href="/"><span class="brand-mark">i<span>.</span></span> infoconex</a><nav aria-label="Main navigation"><a href="/#projects">All projects</a><a href="https://github.com/infoconex">GitHub ↗</a></nav></div></header>
-<main class="case-shell"><div class="container case-columns"><div class="case-main">
+<main class="case-shell"><div class="container"><nav class="case-breadcrumb" aria-label="Breadcrumb"><a href="/#projects">All projects</a><span> / </span>{e(name)}</nav><div class="case-columns"><div class="case-main">
 <section class="case-hero" aria-labelledby="project-title">
-<p class="eyebrow">{e(category)}</p><h1 id="project-title">{e(name)}</h1><p class="case-lead">{e(desc)}</p>
-<div class="case-ctas">{links()}</div>
+<div class="case-hero-copy"><p class="eyebrow">{e(kind)} · {e(category)}</p><h1 id="project-title">{e(name)}</h1><p class="case-tagline">{e(tagline)}</p><p class="case-lead">{e(seo_description)}</p></div>
+<div class="case-hero-visual" aria-label="Project capabilities"><span class="case-visual-label">KEY THEMES</span>{visual}</div>
 </section>
 <article>
 <section class="case-section" id="problem"><span class="case-kicker">01 / Why</span><h2>The problem</h2><p>{e(problem)}</p>{problem_details}</section>
@@ -187,16 +188,15 @@ for project, slug in zip(projects, slugs):
 <section class="case-section" id="audience"><span class="case-kicker">03 / Who</span><h2>Who it's for</h2><p>{e(audience)}</p>{audience_details}</section>
 <section class="case-section" id="workflow"><span class="case-kicker">04 / How</span><h2>How it works</h2><p>Key capabilities and concepts. See the project documentation or source code for implementation details.</p><div class="case-steps">{capabilities}</div></section>
 <section class="case-section" id="decisions"><span class="case-kicker">05 / Engineering perspective</span><h2>Design decisions that matter</h2><ul class="case-bullets">{decision_items}</ul></section>
-<section class="case-section" id="status"><span class="case-kicker">06 / Current state</span><h2>Explore the implementation</h2><p>{e(status)}</p>{status_details}<div class="case-related"><h3>Go deeper</h3><p>Use the project links to explore the source and available documentation.</p><div class="case-ctas">{links(primary_docs=True)}</div></div></section>
+<section class="case-section" id="status"><span class="case-kicker">06 / Current state</span><h2>Explore the implementation</h2><p>{e(status)}</p>{status_details}</section>
 {articles_section}
 {related_section}
 </article></div>
-<aside class="case-aside" aria-label="On this page"><h2>On this page</h2>
-<nav class="case-toc" aria-label="Project sections"><a href="#problem">The problem</a><a href="#solution">The solution</a><a href="#audience">Who it's for</a><a href="#workflow">How it works</a><a href="#decisions">Design decisions</a><a href="#status">Current state</a>{optional_toc}</nav>
-<div class="case-rule"></div><div class="case-aside-links"><a href="{e(github)}">View source code ↗</a>{docs_aside}</div>
-<div class="case-rule"></div><nav class="case-aside-links" aria-label="Site navigation"><a href="/#projects">All projects</a><a href="https://github.com/infoconex">GitHub ↗</a></nav>
+<aside class="case-aside" aria-label="Project context">
+<div class="case-side-card"><h2>Project details</h2><div class="case-side-actions">{actions}</div><dl>{detail_rows}</dl></div>
+<div class="case-side-card"><h2>On this page</h2><nav class="case-toc" aria-label="Project sections"><a href="#problem">The problem</a><a href="#solution">The solution</a><a href="#audience">Who it's for</a><a href="#workflow">How it works</a><a href="#decisions">Design decisions</a><a href="#status">Current state</a>{optional_toc}</nav></div>
 </aside></div></main>
 <footer class="site-footer"><div class="container footer-inner"><span>© infoconex</span><nav aria-label="Footer navigation"><a href="/#projects">All projects</a><a href="https://github.com/infoconex">GitHub ↗</a></nav></div></footer>
-</body></html>'''
+<script src="../../project-scrollspy.js" defer></script></body></html>'''
     write(ROOT / "projects" / slug / "index.html", external_links_new_tab(content))
 print(f"Generated homepage, sitemap and {len(projects)} project pages.")
