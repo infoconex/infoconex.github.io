@@ -50,9 +50,26 @@ def external_links_new_tab(markup):
 
 homepage = ROOT / "index.html"
 source = homepage.read_text(encoding="utf-8")
+PROJECT_ICON_PATHS = {
+    "coding-blog": "M4 19.5A2.5 2.5 0 0 1 6.5 17H20 M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z",
+    "isolated-dotnet-sdk": "m4 17 6-6-6-6 M12 19h8",
+    "copy-github-repo": "M8 4H5a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3 M9 9h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2Z",
+    "ai-flywheel-spec": "M4 7h6 M14 7h6 M7 4v6 M17 4v6 M4 17h6 M14 17h6 M7 14v6 M17 14v6 M10 7l4 10",
+    "ai-flywheel-framework": "M12 2 4 7v10l8 5 8-5V7l-8-5Z M4 7l8 5 8-5 M12 12v10",
+    "ai-flywheel-cli": "M4 17 10 11 4 5 M12 19h8",
+    "ai-flywheel-cli-python": "M8 8 4 12l4 4 M16 8l4 4-4 4 M14 4l-4 16",
+    "ai-flywheel-framework-testing": "M9 3h6 M10 3v7l-5 8a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-8V3 M8 15h8",
+    "nuget-publication-cooldown-poc": "M12 2 3 7v10l9 5 9-5V7l-9-5Z M3 7l9 5 9-5 M12 12v10 M8 16h3"
+}
+def project_icon(slug):
+    path = PROJECT_ICON_PATHS.get(slug)
+    return (f'<span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" '
+            f'stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'
+            f'<path d="{e(path)}"/></svg></span>') if path else ""
+
 cards = "\n          ".join(
     f'<a class="project-card" data-order="{p["order"]}" href="/projects/{slug}/">'
-    f'<div class="card-top"><span class="card-tag">{e(p["category"])}</span>'
+    f'<div class="card-top"><span class="card-identity">{project_icon(slug)}<span class="card-tag">{e(p["category"])}</span></span>'
     f'<span class="card-arrow" aria-hidden="true">↗</span></div>'
     f'<h3>{e(p["name"])}</h3><p>{e(p["description"])}</p></a>'
     for p, slug in zip(projects, slugs)
