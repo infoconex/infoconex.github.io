@@ -111,7 +111,7 @@ for project, slug in zip(projects, slugs):
     if project.get("lastmod"):
         ET.SubElement(entry, "lastmod").text = project["lastmod"]
 ET.indent(root, space="  ")
-write(ROOT / "pages-sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n' + ET.tostring(root, encoding="unicode") + "\n")
+write(ROOT / "sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n' + ET.tostring(root, encoding="unicode") + "\n")
 
 project_by_slug = dict(zip(slugs, projects))
 
