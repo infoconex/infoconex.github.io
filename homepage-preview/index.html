@@ -18,25 +18,25 @@
 .mountain-far{background:#6689a13d;transform:translateY(-48px);filter:blur(2px)}.mountain-mid{background:#243f56b0;transform:scaleX(-1) translateY(-15px)}.mountain-near{background:linear-gradient(180deg,#20394fb0,#172c3d);height:41%;clip-path:polygon(0 49%,18% 66%,31% 33%,48% 77%,64% 29%,79% 53%,91% 19%,100% 36%,100% 100%,0 100%)}
 .projects-section{padding-top:45px}.discovery{border:1px solid #566c7d;background:linear-gradient(145deg,#314354,#2b3b4a);padding:21px;border-radius:14px;margin-bottom:25px;box-shadow:0 16px 42px #111e2a55}.discovery-top{display:flex;align-items:end;gap:18px;justify-content:space-between}.discovery-top label{display:grid;flex:1;gap:8px}.discovery-label{font-weight:720;font-size:.86rem}.discovery input{width:100%;border:1px solid #698095;background:#233241;color:#f1f5f9;border-radius:9px;padding:15px 17px;font:inherit}.discovery input::placeholder{color:#aebfce}#project-count{color:var(--muted);font-size:.87rem;padding-bottom:14px;white-space:nowrap}.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}.chip{cursor:pointer;background:#203244;border:1px solid #526d82;color:#d9e6ef;border-radius:99px;padding:8px 14px;font:600 .83rem/1.3 inherit;font-family:inherit}.chip:hover,.chip:focus-visible{border-color:#b5d5e9}.chip.selected{background:#91B5CC;color:#213342;border-color:#91B5CC;font-weight:800}.project-card[hidden]{display:none!important}
 @media(max-width:600px){.hero-demo{min-height:0;padding:48px 0 65px}.mountain{opacity:.5}.discovery-top{display:block}#project-count{display:block;padding:8px 0 0}}
+
+/* Integrated navigation and compressed above-the-fold composition */
+.hero-demo{min-height:0;padding:0 0 30px}.hero-demo .hero-inner{position:relative}.hero-header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:19px 0 24px}.hero-header nav{display:flex;align-items:center;gap:26px;font-size:.91rem}.hero-header .brand{white-space:nowrap}
+.hero-demo .eyebrow{margin:0 0 7px}.hero-demo h1{font-size:clamp(2.45rem,5.3vw,4.45rem);line-height:1.07;margin:8px 0 12px;max-width:760px}.hero-demo .intro{font-size:1.04rem;line-height:1.55;max-width:660px;margin:0 0 3px}
+.projects-section{padding:24px 0 75px}.section-heading{margin-bottom:14px}.section-heading h2{font-size:1.8rem;margin:3px 0}.section-heading .eyebrow{margin:0}.section-heading>p{margin:0}.discovery{padding:14px 17px;margin-bottom:18px}.discovery-top label{gap:4px}.discovery input{padding:10px 13px}.chips{margin-top:10px;gap:7px}.chip{padding:6px 12px}
+@media(max-width:600px){.hero-demo{padding:0 0 31px}.hero-header{padding:15px 0 24px}.hero-header nav{gap:15px;font-size:.83rem}.hero-demo h1{font-size:clamp(2.35rem,8vw,3.2rem)}.section-heading{gap:4px}.section-heading>p{font-size:.84rem}.projects-section{padding-top:22px}}
 </style></head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="/" aria-label="infoconex home"><span class="brand-mark">i<span>.</span></span> infoconex</a>
-      <nav aria-label="Main navigation"><a href="#projects">Projects</a><a href="https://github.com/infoconex" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
-    </div>
-  </header>
   <main>
-    <section class="hero hero-demo"><div class="container hero-inner"><p class="preview-note">HOMEPAGE DESIGN PREVIEW · NOT THE LIVE HOMEPAGE</p>
+    <section class="hero hero-demo"><div class="container hero-inner"><div class="hero-header"><a class="brand" href="/" aria-label="infoconex home"><span class="brand-mark">i<span>.</span></span> infoconex</a><nav aria-label="Main navigation"><a href="#projects">Projects</a><a href="https://github.com/infoconex" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></div>
       <p class="eyebrow">SOFTWARE · OPEN SOURCE · EXPERIMENTS</p>
       <h1>Projects built to<br><span>explore what's next.</span></h1>
       <p class="intro">Explore open-source AI development, .NET tools, GitHub automation, and software engineering writing from <strong>infoconex</strong>.</p>
-      <a class="primary-link" href="#projects">Explore projects <span aria-hidden="true">↓</span></a>
+      
       </div><div class="mountain mountain-far" aria-hidden="true"></div><div class="mountain mountain-mid" aria-hidden="true"></div><div class="mountain mountain-near" aria-hidden="true"></div>
     </section>
     <section class="projects-section" id="projects" aria-labelledby="projects-heading">
       <div class="container">
-        <div class="section-heading"><div><p class="eyebrow">THE WORK</p><h2 id="projects-heading">Projects</h2></div><p>Public repositories and ongoing experiments.</p></div>
+        <div class="section-heading"><div><p class="eyebrow">THE WORK</p><h2 id="projects-heading">Browse projects</h2></div><p>Public repositories and ongoing experiments.</p></div>
         <div class="discovery"><div class="discovery-top"><label for="project-search"><span class="discovery-label">Find a project</span><input id="project-search" type="search" placeholder="Search by name, topic, or technology…" autocomplete="off"></label><span id="project-count" aria-live="polite"></span></div><div class="chips" aria-label="Filter projects by category" role="group"><button class="chip selected" type="button" data-filter="all" aria-pressed="true">All projects</button><button class="chip" type="button" data-filter="ai" aria-pressed="false">AI Flywheel</button><button class="chip" type="button" data-filter="dotnet" aria-pressed="false">.NET</button><button class="chip" type="button" data-filter="tools" aria-pressed="false">Developer tools</button><button class="chip" type="button" data-filter="writing" aria-pressed="false">Writing</button></div></div>
         <div id="project-grid" class="project-grid">
           <a class="project-card" data-order="10" href="/projects/coding-blog/"><div class="card-top"><span class="card-tag">Writing</span><span class="card-arrow" aria-hidden="true">↗</span></div><h3>Coding Blog</h3><p>Articles on software engineering, system architecture, .NET development, tooling, and practical lessons learned from hands-on experiments.</p></a>
