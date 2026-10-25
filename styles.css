@@ -44,3 +44,6 @@
 .site-footer nav{display:flex;gap:26px}
 @media(max-width:800px){.case-columns{grid-template-columns:1fr;gap:0}.case-aside{position:static;order:-1;margin-top:0}.case-toc{grid-template-columns:repeat(2,minmax(0,1fr))}.case-hero{padding:20px 0 40px}.case-shell{padding:30px 0 60px}}
 @media(max-width:520px){.case-toc{grid-template-columns:repeat(2,minmax(0,1fr))}.case-btn{width:100%;justify-content:center}.site-footer nav{flex-wrap:wrap;gap:16px}}
+
+/* Long-form project case studies */
+.case-section>p+p{margin-top:16px}.case-step p{color:var(--muted);line-height:1.7;font-size:.92rem;margin:9px 0 0}.case-bullets li{padding-left:6px;margin-bottom:23px}.case-bullets li strong{display:block;color:var(--text);font-weight:650;margin-bottom:8px}.case-bullets li p{margin:7px 0;color:var(--muted);font-size:.94rem;line-height:1.7}
