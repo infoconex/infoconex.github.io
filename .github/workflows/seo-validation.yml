@@ -36,7 +36,6 @@ jobs:
           mkdir -p _site
           cp index.html styles.css script.js project-scrollspy.js projects.json favicon.svg robots.txt sitemap.xml pages-sitemap.xml _site/
           cp -R projects _site/projects
-          cp -R homepage-preview _site/homepage-preview
           cp -R assets _site/assets
           touch _site/.nojekyll
       - name: Upload GitHub Pages artifact
