@@ -78,7 +78,7 @@
     "description": "Install, audit, verify, and remove exact .NET SDK versions in a user-owned directory without changing system-wide SDKs or PATH. Supports PowerShell on Windows and Bash on Linux/macOS.",
     "url": "https://github.com/infoconex/isolated-dotnet-sdk",
     "order": 20,
-    "website": "https://infoconex.github.io/isolated-dotnet-sdk/",
+    "website": "https://projects.infoconex.com/isolated-dotnet-sdk/",
     "overview": "Use exact .NET SDK versions without modifying the machine-wide installation or PATH. The project focuses on repeatable local SDK management across development and automation environments.",
     "highlights": [
       "Install and remove specific SDK versions in a user-owned directory",
@@ -172,7 +172,7 @@
     "description": "PowerShell module for copying or migrating GitHub repositories. Choose a clean Snapshot or history-preserving FullHistory mode, with preview plans and safety checks.",
     "url": "https://github.com/infoconex/copy-github-repo",
     "order": 30,
-    "website": "https://infoconex.github.io/copy-github-repo/",
+    "website": "https://projects.infoconex.com/copy-github-repo/",
     "overview": "A PowerShell-based approach to copying or migrating GitHub repositories with deliberate choices about source history and a preview of the intended operation.",
     "highlights": [
       "Snapshot mode creates a clean copy; FullHistory preserves history",
@@ -271,7 +271,7 @@
     "description": "An evidence-driven AI operating model: execute work, observe outcomes, evaluate evidence, validate improvements, and reuse learning in future execution under defined governance.",
     "url": "https://github.com/infoconex/ai-flywheel-spec",
     "order": 40,
-    "website": "https://infoconex.github.io/ai-flywheel-spec/",
+    "website": "https://projects.infoconex.com/ai-flywheel-spec/",
     "overview": "Defines the operating rules for a governed improvement cycle in AI-assisted work. Rather than treating each execution as isolated, the specification connects goals, evidence, evaluation, and reusable learning.",
     "highlights": [
       "Defines an execution-to-evidence-to-improvement lifecycle",
