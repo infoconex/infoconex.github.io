@@ -30,6 +30,24 @@ def write(path, content):
 def e(value):
     return html.escape(value, quote=True)
 
+def external_links_new_tab(markup):
+    """Open off-site links separately without changing internal navigation."""
+    def update(match):
+        tag = match.group(0)
+        href_match = re.search(r'\\bhref="([^"]+)"', tag)
+        if not href_match:
+            return tag
+        href = html.unescape(href_match.group(1))
+        parsed = urlparse(href)
+        if parsed.scheme not in ("https", "http") or parsed.hostname == "infoconex.github.io":
+            return tag
+        # Preserve the existing label and other attributes; normalize attributes.
+        tag = re.sub(r'\\s+target="[^"]*"', "", tag)
+        tag = re.sub(r'\\s+rel="[^"]*"', "", tag)
+        return tag[:-1] + ' target="_blank" rel="noopener noreferrer">'
+    return re.sub(r'<a\\b[^>]*>', update, markup)
+
+
 homepage = ROOT / "index.html"
 source = homepage.read_text(encoding="utf-8")
 cards = "\n          ".join(
@@ -63,7 +81,7 @@ source, n = re.subn(
     source, count=1,
 )
 assert n == 1, "Could not locate homepage structured data"
-write(homepage, source)
+write(homepage, external_links_new_tab(source))
 
 ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
 root = ET.Element("urlset", xmlns=ns)
@@ -165,5 +183,5 @@ for project, slug in zip(projects, slugs):
 </aside></div></main>
 <footer class="site-footer"><div class="container footer-inner"><span>© infoconex</span><nav aria-label="Footer navigation"><a href="/#projects">All projects</a><a href="https://github.com/infoconex">GitHub ↗</a></nav></div></footer>
 </body></html>'''
-    write(ROOT / "projects" / slug / "index.html", content)
+    write(ROOT / "projects" / slug / "index.html", external_links_new_tab(content))
 print(f"Generated homepage, sitemap and {len(projects)} project pages.")
