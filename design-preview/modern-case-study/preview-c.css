@@ -7,3 +7,6 @@
 
 /* Active section indicator for scroll-aware navigation */
 .toc a{display:block;border-left:3px solid transparent;padding:7px 10px;margin-left:-12px;border-radius:0 7px 7px 0;transition:background-color .15s,color .15s,border-color .15s}.toc a.active,.toc a[aria-current="location"]{border-left-color:var(--accent);background:#91B5CC1b;color:#d4efff;font-weight:750}.section{scroll-margin-top:25px}@media(prefers-reduced-motion:reduce){.toc a{transition:none}}
+
+/* Two-column composition: the hero belongs to the article column, with details aligned beside it. */
+.layout{margin-top:0;align-items:start}.layout>main{min-width:0}.layout>main>.hero{margin-bottom:35px}.layout>main>.section:first-of-type{padding-top:27px;border-top:1px solid var(--line)}.layout .hero{grid-template-columns:1fr;gap:19px;min-height:0;padding:31px}.layout .hero h1{font-size:clamp(2.15rem,3.55vw,3.35rem)}.layout .hero-visual{max-width:100%}.layout .visual-window{min-height:0;padding:16px 19px}.layout .visual-rows{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:11px;font-size:.79rem}.layout .sidebar{top:18px}@media(max-width:850px){.layout{margin-top:0}.layout .hero{padding:26px}.layout .visual-rows{grid-template-columns:1fr}}
