@@ -195,7 +195,7 @@ for project, slug in zip(projects, slugs):
 <aside class="case-aside" aria-label="Project context">
 <div class="case-side-card"><h2>Project details</h2><div class="case-side-actions">{actions}</div><dl>{detail_rows}</dl></div>
 <div class="case-side-card"><h2>On this page</h2><nav class="case-toc" aria-label="Project sections"><a href="#problem">The problem</a><a href="#solution">The solution</a><a href="#audience">Who it's for</a><a href="#workflow">How it works</a><a href="#decisions">Design decisions</a><a href="#status">Current state</a>{optional_toc}</nav></div>
-</aside></div></main>
+</aside></div></div></main>
 <footer class="site-footer"><div class="container footer-inner"><span>© infoconex</span><nav aria-label="Footer navigation"><a href="/#projects">All projects</a><a href="https://github.com/infoconex">GitHub ↗</a></nav></div></footer>
 <script src="../../project-scrollspy.js" defer></script></body></html>'''
     write(ROOT / "projects" / slug / "index.html", external_links_new_tab(content))
