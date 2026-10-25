@@ -192,6 +192,13 @@ for project, slug in zip(projects, slugs):
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{e(seo_title)}"><meta name="twitter:description" content="{e(seo_description)}"><meta name="twitter:image" content="{share_image}">
 <link rel="canonical" href="{canonical}"><link rel="icon" href="../../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../styles.css">
 <title>{e(seo_title)}</title><script type="application/ld+json">{json.dumps(schema, ensure_ascii=False).replace("<", "\\u003c")}</script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "z340egz0ho");
+</script>
 </head><body>
 <header class="site-header"><div class="container header-inner"><a class="brand" href="/"><span class="brand-mark">i<span>.</span></span> infoconex</a><nav aria-label="Main navigation"><a href="/#projects">All projects</a><a href="https://github.com/infoconex">GitHub ↗</a></nav></div></header>
 <main class="case-shell"><div class="container"><nav class="case-breadcrumb" aria-label="Breadcrumb"><a href="/#projects">All projects</a><span> / </span>{e(name)}</nav><div class="case-columns"><div class="case-main">
