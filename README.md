@@ -75,3 +75,7 @@ The sitemap URLs from other project sites are references, not proof of live depl
 - `robots.txt` — crawler directions
 - `scripts/validate_seo.py` — standard-library SEO integrity check
 
+
+## Repository images for social previews
+
+The optional `socialSource` field in `projects.json` points to an explicit, approved image in an infoconex GitHub repository. The image build fetches it, checks basic resolution and size, and fits it into a 1200×630 PNG without cropping. If the source is unavailable or unsuitable, the generator uses its original Smoky Slate card. Currently configured for Copy GitHub Repo and AI Flywheel Specification. Isolated .NET SDK remains on the generated fallback until a suitable repository image can be confirmed. The image published at `assets/social/<slug>.png` is always served from this site rather than hotlinked.
