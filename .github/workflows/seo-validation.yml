@@ -34,7 +34,7 @@ jobs:
       - name: Stage published site
         run: |
           mkdir -p _site
-          cp CNAME index.html styles.css script.js project-scrollspy.js projects.json favicon.svg robots.txt sitemap.xml pages-sitemap.xml _site/
+          cp CNAME index.html styles.css script.js project-scrollspy.js projects.json favicon.svg robots.txt sitemap.xml _site/
           cp -R projects _site/projects
           cp -R assets _site/assets
           touch _site/.nojekyll
