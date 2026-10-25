@@ -138,6 +138,17 @@ for url in paths:
         graphs = [node for document in parser.scripts for node in document.get("@graph", [document])]
         assert any(node.get("@type") == "BreadcrumbList" for node in graphs), f"Missing breadcrumbs: {file}"
         assert any(node.get("@type") == "WebPage" for node in graphs), f"Missing WebPage schema: {file}"
+    if url != "/":
+        markup = file.read_text(encoding="utf-8")
+        assert 'class="case-hero"' in markup and 'class="case-side-actions"' in markup, f"Missing modern project layout: {file}"
+        assert markup.count('View source code ↗') == 1, f"Duplicate source action: {file}"
+        slug = url.rstrip("/").split("/")[-1]
+        project = next(p for p in projects if p["url"].endswith("/" + slug))
+        expected_docs = 1 if project.get("website") else 0
+        assert markup.count('class="case-side-action case-outline"') == expected_docs, f"Incorrect documentation action: {file}"
+        assert 'src="../../project-scrollspy.js"' in markup, f"Missing section tracker: {file}"
+        assert ('id="articles"' in markup) == bool(project.get("articles")), f"Article section mismatch: {file}"
+        assert ('id="related"' in markup) == bool(project.get("related")), f"Related section mismatch: {file}"
     for fragment in parser.anchor_fragments:
         assert fragment in parser.ids, f"Broken anchor #{fragment} in {file}"
     for href in parser.links:
@@ -148,6 +159,7 @@ for url in paths:
             elif target not in {"/sitemap.xml"}:
                 assert (ROOT / target.lstrip("/")).is_file(), f"Broken local link: {href} in {file}"
 assert (ROOT / "assets/social/home.png").is_file(), "Missing homepage social image"
+assert (ROOT / "project-scrollspy.js").is_file(), "Missing production section tracker"
 home = Extract()
 home.feed((ROOT / "index.html").read_text())
 for url in paths[1:]:
