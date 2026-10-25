@@ -69,7 +69,8 @@
         "description": "How the Coding blog was rebuilt using Jekyll, GitHub Pages, Git, and Markdown."
       }
     ],
-    "lastmod": "2026-10-24"
+    "lastmod": "2026-10-24",
+    "seoDescription": "Practical software engineering articles about architecture, .NET development, tooling, and hands-on experiments."
   },
   {
     "name": "Isolated .NET SDK",
@@ -161,7 +162,8 @@
         "description": "Why isolated SDK installations help with prerelease evaluation and reproducible .NET workflows."
       }
     ],
-    "lastmod": "2026-10-24"
+    "lastmod": "2026-10-24",
+    "seoDescription": "Install, audit, and verify exact .NET SDK versions without changing system-wide installations or PATH."
   },
   {
     "name": "Copy GitHub Repo",
@@ -258,7 +260,8 @@
         "description": "Opt-in Pages restoration, custom-domain handoff, verification, and recovery evidence."
       }
     ],
-    "lastmod": "2026-10-24"
+    "lastmod": "2026-10-24",
+    "seoDescription": "Copy GitHub repositories with PowerShell using clean snapshots or full history, preview plans, and safety checks."
   },
   {
     "name": "AI Flywheel Specification",
@@ -354,7 +357,8 @@
         "description": "How the Specification, Framework, Testing, and CLI responsibilities evolved into separate projects."
       }
     ],
-    "lastmod": "2026-10-24"
+    "lastmod": "2026-10-24",
+    "seoDescription": "An evidence-driven AI operating model for governed execution, validated improvement, and reusable learning."
   },
   {
     "name": "AI Flywheel Framework",
@@ -453,7 +457,8 @@
         "description": "How the framework fits into the larger Flywheel architecture."
       }
     ],
-    "lastmod": "2026-10-24"
+    "lastmod": "2026-10-24",
+    "seoDescription": "An installable AI Flywheel operating framework for repository onboarding, lifecycle guidance, and governance."
   },
   {
     "name": "AI Flywheel CLI",
@@ -539,7 +544,8 @@
         "description": "The motivation for moving repeatable lifecycle operations into deterministic tooling; not a dedicated .NET CLI article."
       }
     ],
-    "lastmod": "2026-10-24"
+    "lastmod": "2026-10-24",
+    "seoDescription": "An in-development .NET CLI for managing and validating AI Flywheel installations, missions, and goals."
   },
   {
     "name": "AI Flywheel CLI Python",
@@ -630,7 +636,8 @@
         "description": "The rationale for introducing deterministic tools to operate the Flywheel."
       }
     ],
-    "lastmod": "2026-10-24"
+    "lastmod": "2026-10-24",
+    "seoDescription": "A Python CLI for safely inspecting, validating, installing, and operating local AI Flywheel artifacts."
   },
   {
     "name": "AI Flywheel Framework Testing",
@@ -721,7 +728,8 @@
         "description": "The role of independent framework testing in the Flywheel ecosystem."
       }
     ],
-    "lastmod": "2026-10-24"
+    "lastmod": "2026-10-24",
+    "seoDescription": "Repeatable tests, versioned fixtures, and evidence capture for validating AI Flywheel Framework behavior."
   },
   {
     "name": "NuGet Publication Cooldown POC",
@@ -807,6 +815,7 @@
         "description": "The experiment's five scenarios and findings about cooldown-aware selection versus explicit restore."
       }
     ],
-    "lastmod": "2026-10-24"
+    "lastmod": "2026-10-24",
+    "seoDescription": "Reproducible .NET 11 RC2 experiments on NuGet publication cooldowns, version selection, and restores."
   }
 ]
