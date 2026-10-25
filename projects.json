@@ -805,10 +805,6 @@
       {
         "slug": "isolated-dotnet-sdk",
         "relationship": "Provides isolated SDK setup for the experiment"
-      },
-      {
-        "slug": "coding-blog",
-        "relationship": "Research context and technical writing"
       }
     ],
     "articles": [
