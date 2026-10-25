@@ -2,6 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://projects.infoconex.com/sitemap.xml
-Sitemap: https://coding.infoconex.com/sitemap.xml
-Sitemap: https://projects.infoconex.com/copy-github-repo/sitemap.xml
-Sitemap: https://projects.infoconex.com/ai-flywheel-spec/sitemap.xml
