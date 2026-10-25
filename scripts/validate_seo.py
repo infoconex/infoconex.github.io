@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Check local SEO consistency without third-party packages or network access."""
 import json
+import re
 from datetime import date
 from urllib.parse import urlparse
 from html.parser import HTMLParser
@@ -43,6 +44,16 @@ for project in projects:
             raise AssertionError(f"Invalid lastmod date: {value}") from exc
         assert parsed_date <= date.today(), f"Future lastmod date: {value}"
 
+# Editorial checks are deliberately generous: Google has no fixed character limits.
+titles = [p["name"] + " | infoconex" for p in projects]
+descriptions = [p.get("seoDescription", "") for p in projects]
+assert len(set(titles)) == len(titles), "Duplicate page titles"
+assert len(set(descriptions)) == len(descriptions), "Duplicate SEO descriptions"
+for p, title, desc in zip(projects, titles, descriptions):
+    assert 15 <= len(title) <= 70, f"Review SEO title: {p['name']}"
+    assert 70 <= len(desc) <= 170, f"Review SEO description: {p['name']}"
+    assert desc.strip() == desc, f"SEO description whitespace: {p['name']}"
+
 class Extract(HTMLParser):
     def __init__(self):
         super().__init__()
@@ -52,6 +63,12 @@ class Extract(HTMLParser):
         self.canonical = []
         self.titles = 0
         self.descriptions = 0
+        self.title_text = ""
+        self.meta = {}
+        self.scripts = []
+        self._in_title = False
+        self._in_jsonld = False
+        self._jsonld = ""
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         if attrs.get("id"):
@@ -65,8 +82,29 @@ class Extract(HTMLParser):
             self.canonical.append(attrs.get("href"))
         if tag == "title":
             self.titles += 1
+            self._in_title = True
+        if tag == "script" and attrs.get("type") == "application/ld+json":
+            self._in_jsonld = True
+            self._jsonld = ""
+        if tag == "meta":
+            key = attrs.get("name") or attrs.get("property")
+            if key:
+                self.meta[key] = attrs.get("content", "")
         if tag == "meta" and attrs.get("name") == "description":
             self.descriptions += 1
+
+    def handle_data(self, data):
+        if self._in_title:
+            self.title_text += data
+        if self._in_jsonld:
+            self._jsonld += data
+
+    def handle_endtag(self, tag):
+        if tag == "title":
+            self._in_title = False
+        if tag == "script" and self._in_jsonld:
+            self.scripts.append(json.loads(self._jsonld))
+            self._in_jsonld = False
 
 def html_path(url):
     return ROOT / (url.lstrip("/") + "index.html" if url != "/" else "index.html")
@@ -78,6 +116,21 @@ for url in paths:
     parser.feed(file.read_text())
     assert parser.canonical == [BASE + url], f"Canonical mismatch: {file}"
     assert parser.titles == 1 and parser.descriptions == 1, f"Missing metadata: {file}"
+    if url != "/":
+        slug = url.rstrip("/").split("/")[-1]
+        project = next(p for p in projects if p["url"].endswith("/" + slug))
+        title = project["name"] + " | infoconex"
+        description = project["seoDescription"]
+        share = BASE + "/assets/social/" + slug + ".png"
+        assert parser.title_text == title, f"SEO title mismatch: {file}"
+        for key in ("description", "og:description", "twitter:description"):
+            assert parser.meta.get(key) == description, f"{key} mismatch: {file}"
+        assert parser.meta.get("og:title") == title and parser.meta.get("twitter:title") == title
+        assert parser.meta.get("og:image") == share and parser.meta.get("twitter:image") == share
+        assert (ROOT / "assets" / "social" / (slug + ".png")).is_file(), f"Missing share image for {slug}"
+        graphs = [node for document in parser.scripts for node in document.get("@graph", [document])]
+        assert any(node.get("@type") == "BreadcrumbList" for node in graphs), f"Missing breadcrumbs: {file}"
+        assert any(node.get("@type") == "WebPage" for node in graphs), f"Missing WebPage schema: {file}"
     for fragment in parser.anchor_fragments:
         assert fragment in parser.ids, f"Broken anchor #{fragment} in {file}"
     for href in parser.links:
@@ -87,6 +140,7 @@ for url in paths:
                 assert html_path(target).is_file(), f"Broken local link: {href} in {file}"
             elif target not in {"/sitemap.xml"}:
                 assert (ROOT / target.lstrip("/")).is_file(), f"Broken local link: {href} in {file}"
+assert (ROOT / "assets/social/home.png").is_file(), "Missing homepage social image"
 home = Extract()
 home.feed((ROOT / "index.html").read_text())
 for url in paths[1:]:
