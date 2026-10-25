@@ -67,6 +67,13 @@
         "slug": "isolated-dotnet-sdk",
         "relationship": "Featured engineering topic"
       }
+    ],
+    "articles": [
+      {
+        "title": "Out With the Old, In With the New: Rebuilding Coding",
+        "url": "https://coding.infoconex.com/post/2026/08/29/out-with-the-old-in-with-the-new-rebuilding-coding",
+        "description": "How the Coding blog was rebuilt using Jekyll, GitHub Pages, Git, and Markdown."
+      }
     ]
   },
   {
@@ -149,9 +156,14 @@
     ],
     "articles": [
       {
+        "title": "Managing .NET SDKs: Installation Was Just the Beginning",
+        "url": "https://coding.infoconex.com/post/2026/10/21/managing-dotnet-sdks-installation-was-just-the-beginning",
+        "description": "How the isolated SDK utility evolved to support version inventory, verification, and auditing."
+      },
+      {
         "title": "How to Test a New .NET SDK Without Installing It System-Wide",
         "url": "https://coding.infoconex.com/post/2026/09/20/how-to-test-a-new-dotnet-sdk-without-installing-it-system-wide",
-        "description": "The motivation, role of global.json, and lessons from evaluating new SDK versions without changing the machine-wide environment."
+        "description": "Why isolated SDK installations help with prerelease evaluation and reproducible .NET workflows."
       }
     ]
   },
@@ -222,7 +234,34 @@
         "Safety and recoverability matter more than silently copying every possible property. Secrets, external DNS, and some GitHub-side features are deliberately outside the migration scope.",
         "For exact current usage, prerequisites, and release status, consult the source repository and published documentation."
       ]
-    }
+    },
+    "articles": [
+      {
+        "title": "Copy GitHub Repo – Clean Snapshots Without Carrying History",
+        "url": "https://coding.infoconex.com/post/2026/08/09/copy-github-repo-clean-snapshots-without-history",
+        "description": "Why a clean Snapshot migration differs from preserving full Git history."
+      },
+      {
+        "title": "CopyGitHubRepo v0.1.0 Released to the PowerShell Gallery",
+        "url": "https://coding.infoconex.com/post/2026/08/22/copygithubrepo-v0-1-0-released-to-powershell-gallery",
+        "description": "Initial stable release and PowerShell Gallery publication."
+      },
+      {
+        "title": "CopyGitHubRepo v0.2.0: Preserving GitHub Releases During Repository Migration",
+        "url": "https://coding.infoconex.com/post/2026/08/30/copygithubrepo-v0-2-0-preserving-github-releases",
+        "description": "Adding opt-in GitHub Release and asset preservation for FullHistory migrations."
+      },
+      {
+        "title": "CopyGitHubRepo v0.3.0: Keep the Releases, Leave the History Behind",
+        "url": "https://coding.infoconex.com/post/2026/08/31/copygithubrepo-v0-3-0-keep-the-releases-leave-the-history-behind",
+        "description": "Preserving selected release milestones while creating a clean snapshot history."
+      },
+      {
+        "title": "CopyGitHubRepo v0.4.0: Migrating GitHub Pages Without Guessing",
+        "url": "https://coding.infoconex.com/post/2026/09/03/copygithubrepo-v0-4-0-migrating-github-pages-without-guessing",
+        "description": "Opt-in Pages restoration, custom-domain handoff, verification, and recovery evidence."
+      }
+    ]
   },
   {
     "name": "AI Flywheel Specification",
@@ -310,12 +349,12 @@
       {
         "title": "AI Flywheel Spec – From Agent Loop to Compounding System",
         "url": "https://coding.infoconex.com/post/2026/07/15/ai-flywheel-spec-from-agent-loop-to-compounding-system",
-        "description": "Why ordinary agent loops do not necessarily compound, and how evidence, lifecycle stages, and governance turn execution into reusable learning."
+        "description": "Why evidence-driven validation and reusable learning distinguish the Flywheel from a repeating agent loop."
       },
       {
         "title": "From Specification to System: How the AI Flywheel Became Four Projects",
         "url": "https://coding.infoconex.com/post/2026/09/03/from-specification-to-system-how-the-ai-flywheel-became-four-projects",
-        "description": "How the specification evolved into separate Framework, Testing, and CLI projects—and why their responsibilities are kept distinct."
+        "description": "How the Specification, Framework, Testing, and CLI responsibilities evolved into separate projects."
       }
     ]
   },
@@ -403,6 +442,18 @@
         "slug": "ai-flywheel-framework-testing",
         "relationship": "Repeatable framework evaluation"
       }
+    ],
+    "articles": [
+      {
+        "title": "AI Flywheel Framework – Turning the Spec into an Operating Model",
+        "url": "https://coding.infoconex.com/post/2026/07/26/ai-flywheel-framework-turning-the-spec-into-an-operating-model",
+        "description": "Why the framework turns the methodology into installable repository operating artifacts."
+      },
+      {
+        "title": "From Specification to System: How the AI Flywheel Became Four Projects",
+        "url": "https://coding.infoconex.com/post/2026/09/03/from-specification-to-system-how-the-ai-flywheel-became-four-projects",
+        "description": "How the framework fits into the larger Flywheel architecture."
+      }
     ]
   },
   {
@@ -480,6 +531,13 @@
       {
         "slug": "ai-flywheel-spec",
         "relationship": "Normative operating model"
+      }
+    ],
+    "articles": [
+      {
+        "title": "From Specification to System: How the AI Flywheel Became Four Projects",
+        "url": "https://coding.infoconex.com/post/2026/09/03/from-specification-to-system-how-the-ai-flywheel-became-four-projects",
+        "description": "The motivation for moving repeatable lifecycle operations into deterministic tooling; not a dedicated .NET CLI article."
       }
     ]
   },
@@ -559,6 +617,18 @@
         "slug": "ai-flywheel-spec",
         "relationship": "Normative operating model"
       }
+    ],
+    "articles": [
+      {
+        "title": "AI Flywheel CLI for Python – Operating the Flywheel Safely",
+        "url": "https://coding.infoconex.com/post/2026/07/31/ai-flywheel-cli-python-operating-the-flywheel-safely",
+        "description": "Using Python commands for lifecycle operations, validation, installation, and upgrades within explicit safety boundaries."
+      },
+      {
+        "title": "From Specification to System: How the AI Flywheel Became Four Projects",
+        "url": "https://coding.infoconex.com/post/2026/09/03/from-specification-to-system-how-the-ai-flywheel-became-four-projects",
+        "description": "The rationale for introducing deterministic tools to operate the Flywheel."
+      }
     ]
   },
   {
@@ -637,6 +707,18 @@
         "slug": "ai-flywheel-spec",
         "relationship": "Behavioral requirements and governance"
       }
+    ],
+    "articles": [
+      {
+        "title": "Testing the AI Flywheel Framework with Durable Evidence",
+        "url": "https://coding.infoconex.com/post/2026/07/27/testing-the-ai-flywheel-framework-with-durable-evidence",
+        "description": "Why independent version-pinned tests, fixtures, and durable evidence matter."
+      },
+      {
+        "title": "From Specification to System: How the AI Flywheel Became Four Projects",
+        "url": "https://coding.infoconex.com/post/2026/09/03/from-specification-to-system-how-the-ai-flywheel-became-four-projects",
+        "description": "The role of independent framework testing in the Flywheel ecosystem."
+      }
     ]
   },
   {
@@ -714,6 +796,13 @@
       {
         "slug": "coding-blog",
         "relationship": "Research context and technical writing"
+      }
+    ],
+    "articles": [
+      {
+        "title": "Too Hot to Handle? Testing NuGet's New Package Cooldown",
+        "url": "https://coding.infoconex.com/post/2026/10/22/too-hot-to-handle-testing-nugets-new-package-cooldown",
+        "description": "The experiment's five scenarios and findings about cooldown-aware selection versus explicit restore."
       }
     ]
   }
