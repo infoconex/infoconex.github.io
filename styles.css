@@ -4,4 +4,8 @@
 
 /* Smoky Slate focus, contrast, and clarity */
 .site-header{background:rgba(37,47,58,.94)}.project-card{box-shadow:0 3px 12px rgba(0,0,0,.10)}.project-card:hover{box-shadow:0 10px 24px rgba(0,0,0,.18)}.card-tag,.eyebrow{color:#91B5CC}.filter-bar input::placeholder{color:#BECAD7}.primary-link:focus-visible,.project-card:focus-visible{outline:3px solid #91B5CC;outline-offset:3px}
-\n.primary-link{color:#252F3A}.primary-link:hover{color:#252F3A}.brand-mark{color:#252F3A}.secondary-link{color:var(--text)}.secondary-link:hover{color:var(--accent)}\n
+
+.primary-link{color:#252F3A}.primary-link:hover{color:#252F3A}.brand-mark{color:#252F3A}.secondary-link{color:var(--text)}.secondary-link:hover{color:var(--accent)}
+
+/* Project detail content */
+.detail-page .intro{max-width:850px}.detail-page section{margin-top:48px}.detail-page section h2{font-size:1.45rem;line-height:1.25}.detail-page section p{max-width:740px}.detail-highlights{padding-left:1.4rem;max-width:740px;color:var(--muted);line-height:1.75}.detail-highlights li{padding-left:.3rem;margin:.5rem 0}.detail-highlights li::marker{color:var(--accent)}
