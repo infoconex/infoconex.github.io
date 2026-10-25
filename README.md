@@ -14,9 +14,8 @@ In **Settings → Pages → Build and deployment**, set **Source** to **GitHub A
 
 - `index.html` includes crawlable HTML links to all 9 project pages. Search filtering is progressive enhancement and does not remove links for visitors without JavaScript.
 - `projects/<repo-name>/index.html` is a distinct indexable landing page with its own canonical URL, descriptive title, social metadata, and structured data. Some pages link to published documentation.
-- `pages-sitemap.xml` lists the homepage and all project landing pages, with verified per-project `lastmod` dates where supplied.
-- `sitemap.xml` is the sitemap index, also referencing published Jekyll project sitemaps.
-- `robots.txt` advertises the sitemap index.
+- `sitemap.xml` lists the homepage and all project landing pages, with verified per-project `lastmod` dates where supplied.
+- `robots.txt` advertises this site sitemap.
 - The GitHub Actions workflow `.github/workflows/seo-validation.yml` checks HTML canonical metadata, internal links, sitemap entries, and consistency with `projects.json`.
 
 ## Maintain projects (single source of truth)
@@ -40,7 +39,7 @@ The `scripts/build_projects.py` generator reads this catalog and updates:
 - Static, search-engine-readable project cards in `index.html`
 - JSON-LD project order on the homepage
 - All `projects/<repo-name>/index.html` landing pages and their SEO metadata
-- `pages-sitemap.xml`
+- `sitemap.xml`
 
 For project pages, maintain the optional `lastmod` field in `projects.json` as a real `YYYY-MM-DD` date **only when that project's substantive content changes**. The current dates are a baseline for the project-page content revised on October 24, 2026. Cosmetic styling, workflow-only changes, and redeployments do **not** justify updating these dates. New projects may omit `lastmod` until a meaningful date is established. The homepage deliberately omits `lastmod` rather than inventing one. `changefreq` and `priority` are intentionally excluded.
 
@@ -66,16 +65,13 @@ The GitHub Actions workflow generates these files in its checkout, validates the
 3. Submit `https://projects.infoconex.com/sitemap.xml`.
 4. Check coverage and indexing reports after Google crawls the site. Verification and submission must be completed in the appropriate Google account.
 
-The sitemap URLs from other project sites are references, not proof of live deployment. Check their live status independently. Avoid submitting unverified links to search engines.
-
 ## Files
 
 - `index.html`, `styles.css`, `script.js` — homepage and interactive filtering
 - `projects.json` — authoritative project catalog, ordering, and descriptions
 - `scripts/build_projects.py` — static HTML, JSON-LD, and sitemap generator
 - `projects/*/index.html` — search-engine-readable project detail pages
-- `pages-sitemap.xml` — local page URLs
-- `sitemap.xml` — aggregate sitemap index
+- `sitemap.xml` — canonical sitemap for this site
 - `robots.txt` — crawler directions
 - `scripts/validate_seo.py` — standard-library SEO integrity check
 
