@@ -167,7 +167,7 @@ home = Extract()
 home.feed((ROOT / "index.html").read_text())
 for url in paths[1:]:
     assert url in home.links, f"Homepage does not link to {url}"
-tree = ET.parse(ROOT / "pages-sitemap.xml")
+tree = ET.parse(ROOT / "sitemap.xml")
 urls = [n.text for n in tree.findall(".//sm:loc", ns)]
 assert set(urls) == {BASE + p for p in paths}, "Page sitemap differs from project pages"
 for project in projects:
@@ -180,9 +180,6 @@ for project in projects:
 home_entry = [node for node in tree.findall(".//sm:url", ns) if node.findtext("sm:loc", namespaces=ns) == BASE + "/"]
 assert len(home_entry) == 1 and home_entry[0].find("sm:lastmod", ns) is None, "Homepage must not have an unverified lastmod"
 
-index = ET.parse(ROOT / "sitemap.xml")
-indexes = [n.text for n in index.findall(".//sm:loc", ns)]
-assert BASE + "/pages-sitemap.xml" in indexes, "Missing local sitemap in sitemap index"
 robots = (ROOT / "robots.txt").read_text()
-assert f"Sitemap: {BASE}/sitemap.xml" in robots, "robots.txt missing sitemap"
-print(f"SEO validation passed: {len(paths)} pages, {len(indexes)} sitemap index entries")
+assert robots.strip() == f"User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml", "robots.txt must list only this site sitemap"
+print(f"SEO validation passed: {len(paths)} pages, one sitemap")
