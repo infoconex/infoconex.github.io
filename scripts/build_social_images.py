@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Build 1200x630 social share PNG images for the homepage and projects."""
 import json
-import textwrap
+import io
+import urllib.request
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps, UnidentifiedImageError
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "assets" / "social"
@@ -52,8 +53,33 @@ def make_image(title, category, subtitle, filename):
         sub_y += 34
     image.save(OUT / filename, format="PNG", optimize=True)
 
+def use_repo_banner(url, filename):
+    """Use an explicit repo banner, with a generated card as a safe fallback."""
+    try:
+        request = urllib.request.Request(url, headers={"User-Agent": "infoconex-social-image-builder"})
+        with urllib.request.urlopen(request, timeout=12) as response:
+            data = response.read(10 * 1024 * 1024 + 1)
+        if len(data) > 10 * 1024 * 1024:
+            raise ValueError("Image exceeds 10 MB")
+        with Image.open(io.BytesIO(data)) as source:
+            source.load()
+            if source.width < 600 or source.height < 315:
+                raise ValueError("Image resolution too small for a social preview")
+            rgb = source.convert("RGB")
+            background = Image.new("RGB", (1200, 630), "#252F3A")
+            fitted = ImageOps.contain(rgb, (1200, 630), method=Image.Resampling.LANCZOS)
+            background.paste(fitted, ((1200 - fitted.width) // 2, (630 - fitted.height) // 2))
+            background.save(OUT / filename, format="PNG", optimize=True)
+        print(f"Using repository banner: {filename}")
+        return True
+    except (OSError, ValueError, UnidentifiedImageError) as exc:
+        print(f"Repository banner unavailable for {filename}; using generated fallback: {exc}")
+        return False
+
 make_image("AI, .NET & Developer Projects", "Open-source engineering", "Software projects, experiments, and technical writing.", "home.png")
 for p in projects:
     slug = p["url"].rstrip("/").split("/")[-1]
-    make_image(p["name"], p["category"], p["seoDescription"], slug + ".png")
+    filename = slug + ".png"
+    if not p.get("socialSource") or not use_repo_banner(p["socialSource"], filename):
+        make_image(p["name"], p["category"], p["seoDescription"], filename)
 print(f"Generated {len(projects) + 1} social share images.")
