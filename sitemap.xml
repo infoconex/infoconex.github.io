@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap><loc>https://infoconex.github.io/pages-sitemap.xml</loc></sitemap>
-  <sitemap><loc>https://infoconex.github.io/copy-github-repo/sitemap.xml</loc></sitemap>
-  <sitemap><loc>https://infoconex.github.io/ai-flywheel-spec/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://projects.infoconex.com/pages-sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://projects.infoconex.com/copy-github-repo/sitemap.xml</loc></sitemap>
+  <sitemap><loc>https://projects.infoconex.com/ai-flywheel-spec/sitemap.xml</loc></sitemap>
 </sitemapindex>
