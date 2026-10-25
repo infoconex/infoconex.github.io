@@ -34,8 +34,8 @@ def render(project, slug):
     details_html = "".join(f'<div class="detail"><dt>{esc(k)}</dt><dd>{esc(v)}</dd></div>' for k,v in details if v)
     github = project["url"]
     docs = project.get("website")
-    code_cta = external_link(github, "View source code ↗", "btn primary")
-    doc_cta = external_link(docs, "Read documentation ↗" if slug != "coding-blog" else "Visit publication ↗", "btn") if docs else ""
+    code_cta = external_link(github, "View source code ↗", "side-action primary")
+    doc_cta = external_link(docs, "Read documentation ↗" if slug != "coding-blog" else "Visit publication ↗", "side-action secondary") if docs else ""
     actions = code_cta + doc_cta
     stages = [
       ("problem", "01 / Why", "The problem", study.get("problem"), study.get("problemDetails", [])),
@@ -66,7 +66,7 @@ def render(project, slug):
     toc = "".join(f'<a href="#{sid}">{esc(title)}</a>' for sid,title in
         [("problem","The problem"),("solution","The solution"),("audience","Who it\'s for"),("workflow","How it works"),("decisions","Design decisions"),("status","Current state"),("related","Related projects")]
         if any(f'id="{sid}"' in x for x in sections))
-    details_card = f'<div class="card"><h2>Project details</h2><dl>{details_html}</dl></div>' if details_html else ""
+    details_card = f'<div class="card"><h2>Project details</h2><div class="side-actions">{actions}</div><dl>{details_html}</dl></div>' if details_html else ""
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
@@ -75,7 +75,7 @@ def render(project, slug):
 <div class="notice"><div class="wrap"><span>Preview C · Unindexed design experiment</span><nav><a href="/projects/{esc(slug)}/">Existing page</a><a href="/design-preview/modern-case-study/">Other examples</a></nav></div></div>
 <header class="header"><div class="wrap"><a class="brand" href="/"><span class="logo">i.</span> infoconex</a><nav><a href="/#projects">All projects</a>{external_link("https://github.com/infoconex","GitHub ↗")}</nav></div></header>
 <div class="wrap"><div class="crumb"><a href="/#projects">All projects</a><span> / </span>{esc(name)}</div>
-<section class="hero"><p class="eyebrow">{esc(info["kind"])} · {esc(project["category"])}</p><h1>{esc(name)}</h1><p class="tagline">{esc(info["tagline"])}</p><p class="hero-description">{esc(project["seoDescription"])}</p><div class="buttons">{actions}</div></section>
+<section class="hero"><p class="eyebrow">{esc(info["kind"])} · {esc(project["category"])}</p><h1>{esc(name)}</h1><p class="tagline">{esc(info["tagline"])}</p><p class="hero-description">{esc(project["seoDescription"])}</p></section>
 <div class="layout"><main>{"".join(sections)}</main><aside class="sidebar" aria-label="Project context">{details_card}
 <div class="card"><h2>On this page</h2><nav class="toc">{toc}</nav></div>{articles_card}</aside></div></div>
 <footer class="footer"><div class="wrap"><span>© infoconex · Design experiment</span><a href="/projects/{esc(slug)}/">View current page ↗</a></div></footer></body></html>'''
@@ -94,7 +94,9 @@ def main():
         page = (OUT / slug / "index.html").read_text(encoding="utf-8")
         project = by_slug[slug]
         assert 'name="robots" content="noindex,nofollow,noarchive"' in page
-        assert page.count('class="btn primary"') == 1, "Exactly one primary CTA required"
+        assert page.count('class="side-action primary"') == 1, "Exactly one primary CTA required"
+        assert '<div class="buttons">' not in page, "Hero actions should be omitted"
+        assert page.count('class="side-action secondary"') == (1 if project.get("website") else 0)
         assert page.count('View source code ↗') == 1, "Source action repeated"
         assert ('Read documentation ↗' in page) == bool(project.get("website") and slug != "coding-blog")
         assert ('Visit publication ↗' in page) == (slug == "coding-blog")
