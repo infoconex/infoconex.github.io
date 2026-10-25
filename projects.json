@@ -163,7 +163,8 @@
       }
     ],
     "lastmod": "2026-10-24",
-    "seoDescription": "Install, audit, and verify exact .NET SDK versions without changing system-wide installations or PATH."
+    "seoDescription": "Install, audit, and verify exact .NET SDK versions without changing system-wide installations or PATH.",
+    "socialSource": "https://raw.githubusercontent.com/infoconex/isolated-dotnet-sdk/main/assets/images/isolated-dotnet-sdk-banner.png"
   },
   {
     "name": "Copy GitHub Repo",
