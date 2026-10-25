@@ -85,8 +85,14 @@ write(homepage, external_links_new_tab(source))
 
 ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
 root = ET.Element("urlset", xmlns=ns)
-for path in ["/"] + [f"/projects/{slug}/" for slug in slugs]:
-    ET.SubElement(ET.SubElement(root, "url"), "loc").text = BASE + path
+# Only include lastmod when an explicitly maintained date is available.
+# Never use a build timestamp or the shared catalog's Git modification time.
+ET.SubElement(ET.SubElement(root, "url"), "loc").text = BASE + "/"
+for project, slug in zip(projects, slugs):
+    entry = ET.SubElement(root, "url")
+    ET.SubElement(entry, "loc").text = f"{BASE}/projects/{slug}/"
+    if project.get("lastmod"):
+        ET.SubElement(entry, "lastmod").text = project["lastmod"]
 ET.indent(root, space="  ")
 write(ROOT / "pages-sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n' + ET.tostring(root, encoding="unicode") + "\n")
 
