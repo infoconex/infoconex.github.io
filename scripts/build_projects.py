@@ -78,6 +78,16 @@ for project, slug in zip(projects, slugs):
     docs = project.get("website")
     if docs:
         assert urlparse(docs).scheme == "https" and urlparse(docs).netloc, "Invalid website URL"
+    overview = project.get("overview", desc)
+    highlights = project.get("highlights", [])
+    audience = project.get("audience")
+    assert isinstance(overview, str) and overview.strip()
+    assert isinstance(highlights, list) and all(isinstance(item, str) and item.strip() for item in highlights)
+    assert audience is None or isinstance(audience, str)
+    highlights_html = "".join(f"<li>{e(item)}</li>" for item in highlights)
+    overview_html = f'<section aria-labelledby="overview-title"><h2 id="overview-title">Overview</h2><p>{e(overview)}</p></section>'
+    highlights_section = (f'<section aria-labelledby="capabilities-title"><h2 id="capabilities-title">Key capabilities</h2><ul class="detail-highlights">{highlights_html}</ul></section>') if highlights else ""
+    audience_section = (f'<section aria-labelledby="audience-title"><h2 id="audience-title">Who it is for</h2><p>{e(audience)}</p></section>') if audience else ""
     schema = {"@context": "https://schema.org", "@type": "WebPage", "name": name,
               "description": desc, "url": canonical,
               "isPartOf": {"@type": "WebSite", "name": "infoconex", "url": BASE + "/"},
@@ -95,7 +105,10 @@ for project, slug in zip(projects, slugs):
 <header class="site-header"><div class="container header-inner"><a class="brand" href="/"><span class="brand-mark">i<span>.</span></span> infoconex</a><nav aria-label="Main navigation"><a href="/#projects">All projects</a><a href="https://github.com/infoconex">GitHub ↗</a></nav></div></header>
 <main class="container detail-page">
 <p class="eyebrow">{e(category)}</p><h1>{e(name)}</h1><p class="intro">{e(desc)}</p>
-<section aria-labelledby="explore-title"><h2 id="explore-title">Explore this project</h2><p>Explore the source code, project documentation, and implementation details.</p><div class="detail-links"><a class="primary-link" href="{e(github)}">View GitHub repository ↗</a>{extra}</div></section>
+{overview_html}
+{highlights_section}
+{audience_section}
+<section aria-labelledby="explore-title"><h2 id="explore-title">Explore this project</h2><p>Visit the repository for the README, source code, and current implementation status.</p><div class="detail-links"><a class="primary-link" href="{e(github)}">View GitHub repository ↗</a>{extra}</div></section>
 <p class="return-link"><a href="/#projects">← Back to all projects</a></p></main>
 <footer class="site-footer"><div class="container footer-inner"><span>© infoconex</span><div><a href="https://github.com/infoconex">GitHub</a><a href="/sitemap.xml">Sitemap</a></div></div></footer>
 </body></html>'''
