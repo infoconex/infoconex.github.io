@@ -10,7 +10,7 @@ In **Settings → Pages → Build and deployment**, set **Source** to **GitHub A
 
 - `index.html` includes crawlable HTML links to all 9 project pages. Search filtering is progressive enhancement and does not remove links for visitors without JavaScript.
 - `projects/<repo-name>/index.html` is a distinct indexable landing page with its own canonical URL, descriptive title, social metadata, and structured data. Some pages link to published documentation.
-- `pages-sitemap.xml` lists the homepage and all project landing pages.
+- `pages-sitemap.xml` lists the homepage and all project landing pages, with verified per-project `lastmod` dates where supplied.
 - `sitemap.xml` is the sitemap index, also referencing published Jekyll project sitemaps.
 - `robots.txt` advertises the sitemap index.
 - The GitHub Actions workflow `.github/workflows/seo-validation.yml` checks HTML canonical metadata, internal links, sitemap entries, and consistency with `projects.json`.
@@ -37,6 +37,8 @@ The `scripts/build_projects.py` generator reads this catalog and updates:
 - JSON-LD project order on the homepage
 - All `projects/<repo-name>/index.html` landing pages and their SEO metadata
 - `pages-sitemap.xml`
+
+For project pages, maintain the optional `lastmod` field in `projects.json` as a real `YYYY-MM-DD` date **only when that project's substantive content changes**. The current dates are a baseline for the project-page content revised on October 24, 2026. Cosmetic styling, workflow-only changes, and redeployments do **not** justify updating these dates. New projects may omit `lastmod` until a meaningful date is established. The homepage deliberately omits `lastmod` rather than inventing one. `changefreq` and `priority` are intentionally excluded.
 
 To regenerate and validate locally:
 
