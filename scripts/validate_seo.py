@@ -121,6 +121,7 @@ for url in paths:
     assert file.is_file(), f"Missing page: {file}"
     parser = Extract()
     parser.feed(file.read_text())
+    assert file.read_text().count('https://www.clarity.ms/tag/') == 1, f"Clarity must appear exactly once: {file}"
     assert parser.canonical == [BASE + url], f"Canonical mismatch: {file}"
     assert parser.titles == 1 and parser.descriptions == 1, f"Missing metadata: {file}"
     if url != "/":
