@@ -1,6 +1,6 @@
-/* Preview C section-aware navigation. No dependencies. */
+/* Section-aware navigation for production project pages. No dependencies. */
 (() => {
-  const links = [...document.querySelectorAll('.toc a[href^="#"]')];
+  const links = [...document.querySelectorAll('.case-toc a[href^="#"]')];
   const sections = links.map(link => document.getElementById(link.hash.slice(1)));
   if (!links.length || sections.some(section => !section)) return;
 
