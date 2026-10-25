@@ -68,7 +68,8 @@
         "url": "https://coding.infoconex.com/post/2026/08/29/out-with-the-old-in-with-the-new-rebuilding-coding",
         "description": "How the Coding blog was rebuilt using Jekyll, GitHub Pages, Git, and Markdown."
       }
-    ]
+    ],
+    "lastmod": "2026-10-24"
   },
   {
     "name": "Isolated .NET SDK",
@@ -159,7 +160,8 @@
         "url": "https://coding.infoconex.com/post/2026/09/20/how-to-test-a-new-dotnet-sdk-without-installing-it-system-wide",
         "description": "Why isolated SDK installations help with prerelease evaluation and reproducible .NET workflows."
       }
-    ]
+    ],
+    "lastmod": "2026-10-24"
   },
   {
     "name": "Copy GitHub Repo",
@@ -255,7 +257,8 @@
         "url": "https://coding.infoconex.com/post/2026/09/03/copygithubrepo-v0-4-0-migrating-github-pages-without-guessing",
         "description": "Opt-in Pages restoration, custom-domain handoff, verification, and recovery evidence."
       }
-    ]
+    ],
+    "lastmod": "2026-10-24"
   },
   {
     "name": "AI Flywheel Specification",
@@ -350,7 +353,8 @@
         "url": "https://coding.infoconex.com/post/2026/09/03/from-specification-to-system-how-the-ai-flywheel-became-four-projects",
         "description": "How the Specification, Framework, Testing, and CLI responsibilities evolved into separate projects."
       }
-    ]
+    ],
+    "lastmod": "2026-10-24"
   },
   {
     "name": "AI Flywheel Framework",
@@ -448,7 +452,8 @@
         "url": "https://coding.infoconex.com/post/2026/09/03/from-specification-to-system-how-the-ai-flywheel-became-four-projects",
         "description": "How the framework fits into the larger Flywheel architecture."
       }
-    ]
+    ],
+    "lastmod": "2026-10-24"
   },
   {
     "name": "AI Flywheel CLI",
@@ -533,7 +538,8 @@
         "url": "https://coding.infoconex.com/post/2026/09/03/from-specification-to-system-how-the-ai-flywheel-became-four-projects",
         "description": "The motivation for moving repeatable lifecycle operations into deterministic tooling; not a dedicated .NET CLI article."
       }
-    ]
+    ],
+    "lastmod": "2026-10-24"
   },
   {
     "name": "AI Flywheel CLI Python",
@@ -623,7 +629,8 @@
         "url": "https://coding.infoconex.com/post/2026/09/03/from-specification-to-system-how-the-ai-flywheel-became-four-projects",
         "description": "The rationale for introducing deterministic tools to operate the Flywheel."
       }
-    ]
+    ],
+    "lastmod": "2026-10-24"
   },
   {
     "name": "AI Flywheel Framework Testing",
@@ -713,7 +720,8 @@
         "url": "https://coding.infoconex.com/post/2026/09/03/from-specification-to-system-how-the-ai-flywheel-became-four-projects",
         "description": "The role of independent framework testing in the Flywheel ecosystem."
       }
-    ]
+    ],
+    "lastmod": "2026-10-24"
   },
   {
     "name": "NuGet Publication Cooldown POC",
@@ -798,6 +806,7 @@
         "url": "https://coding.infoconex.com/post/2026/10/22/too-hot-to-handle-testing-nugets-new-package-cooldown",
         "description": "The experiment's five scenarios and findings about cooldown-aware selection versus explicit restore."
       }
-    ]
+    ],
+    "lastmod": "2026-10-24"
   }
 ]
