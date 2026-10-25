@@ -20,7 +20,47 @@
         "Prioritize specific engineering examples over broad announcements.",
         "Keep writing connected to actual experiments and implementation work."
       ],
-      "status": "The published blog is the source for current articles, topics, and updates."
+      "status": "The published blog is the source for current articles, topics, and updates.",
+      "problemDetails": [
+        "The articles create a durable record of engineering reasoning, allowing an experiment to be useful beyond the moment it was run.",
+        "The underlying question is not simply whether the project can perform a task, but how that task can remain understandable, repeatable, and safe as conditions change."
+      ],
+      "solutionDetails": [
+        "Each piece can connect the motivating question to an implementation, its observations, and the practical lessons readers can carry into their own systems.",
+        "Read an article when you are weighing a particular architecture or tool choice, or when you want to reproduce a documented experiment."
+      ],
+      "audienceDetails": [
+        "A practical fit is a reader or maintainer who wants a defined workflow and documented boundaries rather than an unexplained one-off operation.",
+        "Read an article when you are weighing a particular architecture or tool choice, or when you want to reproduce a documented experiment."
+      ],
+      "workflowDetails": [
+        [
+          "Software engineering and system architecture articles.",
+          "Each piece can connect the motivating question to an implementation, its observations, and the practical lessons readers can carry into their own systems."
+        ],
+        [
+          "Hands-on .NET and developer-tooling notes.",
+          "Editorial clarity takes precedence over reproducing every source file on the portfolio page; the published articles hold the full examples."
+        ],
+        [
+          "Technical experiments and lessons learned.",
+          "Read an article when you are weighing a particular architecture or tool choice, or when you want to reproduce a documented experiment."
+        ]
+      ],
+      "decisionDetails": [
+        [
+          "Prioritize specific engineering examples over broad announcements.",
+          "Editorial clarity takes precedence over reproducing every source file on the portfolio page; the published articles hold the full examples."
+        ],
+        [
+          "Keep writing connected to actual experiments and implementation work.",
+          "The articles create a durable record of engineering reasoning, allowing an experiment to be useful beyond the moment it was run."
+        ]
+      ],
+      "statusDetails": [
+        "Editorial clarity takes precedence over reproducing every source file on the portfolio page; the published articles hold the full examples.",
+        "For exact current usage, prerequisites, and release status, consult the source repository and published documentation."
+      ]
     }
   },
   {
@@ -45,7 +85,51 @@
         "Explicit, verifiable SDK versions.",
         "PowerShell on Windows and Bash on Linux/macOS."
       ],
-      "status": "Installation, audit, verification, and removal are documented; consult the repository and published docs for current examples and limitations."
+      "status": "Installation, audit, verification, and removal are documented; consult the repository and published docs for current examples and limitations.",
+      "problemDetails": [
+        "The repository documents this need in the context of evaluating newer .NET versions while retaining a predictable everyday development environment.",
+        "The underlying question is not simply whether the project can perform a task, but how that task can remain understandable, repeatable, and safe as conditions change."
+      ],
+      "solutionDetails": [
+        "An installation is staged under ~/dotnet-sdks, verified against Microsoft's checksums and the requested exact SDK version, then promoted into the isolated inventory. List, audit, verify, and remove have distinct responsibilities.",
+        "Choose it when testing a prerelease SDK, reproducing a version-specific issue, or using an SDK outside a team's regular machine setup."
+      ],
+      "audienceDetails": [
+        "A practical fit is a reader or maintainer who wants a defined workflow and documented boundaries rather than an unexplained one-off operation.",
+        "Choose it when testing a prerelease SDK, reproducing a version-specific issue, or using an SDK outside a team's regular machine setup."
+      ],
+      "workflowDetails": [
+        [
+          "Install and remove specific SDK versions in a user-owned directory.",
+          "An installation is staged under ~/dotnet-sdks, verified against Microsoft's checksums and the requested exact SDK version, then promoted into the isolated inventory. List, audit, verify, and remove have distinct responsibilities."
+        ],
+        [
+          "Audit and verify the installed SDK inventory.",
+          "This is filesystem isolation, not a security sandbox. The SDK still runs with the current user's permissions; explicit invocation replaces transparent PATH switching."
+        ],
+        [
+          "PowerShell support on Windows and Bash support on Linux and macOS.",
+          "Choose it when testing a prerelease SDK, reproducing a version-specific issue, or using an SDK outside a team's regular machine setup."
+        ]
+      ],
+      "decisionDetails": [
+        [
+          "Isolation over global machine changes.",
+          "This is filesystem isolation, not a security sandbox. The SDK still runs with the current user's permissions; explicit invocation replaces transparent PATH switching."
+        ],
+        [
+          "Explicit, verifiable SDK versions.",
+          "The repository documents this need in the context of evaluating newer .NET versions while retaining a predictable everyday development environment."
+        ],
+        [
+          "PowerShell on Windows and Bash on Linux/macOS.",
+          "An installation is staged under ~/dotnet-sdks, verified against Microsoft's checksums and the requested exact SDK version, then promoted into the isolated inventory. List, audit, verify, and remove have distinct responsibilities."
+        ]
+      ],
+      "statusDetails": [
+        "This is filesystem isolation, not a security sandbox. The SDK still runs with the current user's permissions; explicit invocation replaces transparent PATH switching.",
+        "For exact current usage, prerequisites, and release status, consult the source repository and published documentation."
+      ]
     }
   },
   {
@@ -70,7 +154,51 @@
         "Expose the intended operation before execution.",
         "Prefer safety checks to surprising repository changes."
       ],
-      "status": "The repository and published documentation describe available commands, requirements, and current behavior."
+      "status": "The repository and published documentation describe available commands, requirements, and current behavior.",
+      "problemDetails": [
+        "A normal Git clone does not recreate every GitHub-side setting or release artifact, and a fresh public copy may intentionally need a clean provenance boundary.",
+        "The underlying question is not simply whether the project can perform a task, but how that task can remain understandable, repeatable, and safe as conditions change."
+      ],
+      "solutionDetails": [
+        "Review a non-mutating plan, choose Snapshot or FullHistory, and explicitly execute the approved operation. Optional releases and GitHub Pages restoration have separate opt-in behavior and verification boundaries.",
+        "Use Snapshot for clean publication, FullHistory where ancestry matters, and plan-only mode before any move that could affect an existing destination."
+      ],
+      "audienceDetails": [
+        "A practical fit is a reader or maintainer who wants a defined workflow and documented boundaries rather than an unexplained one-off operation.",
+        "Use Snapshot for clean publication, FullHistory where ancestry matters, and plan-only mode before any move that could affect an existing destination."
+      ],
+      "workflowDetails": [
+        [
+          "Snapshot mode creates a clean copy; FullHistory preserves history.",
+          "Review a non-mutating plan, choose Snapshot or FullHistory, and explicitly execute the approved operation. Optional releases and GitHub Pages restoration have separate opt-in behavior and verification boundaries."
+        ],
+        [
+          "Preview plans before making repository changes.",
+          "Safety and recoverability matter more than silently copying every possible property. Secrets, external DNS, and some GitHub-side features are deliberately outside the migration scope."
+        ],
+        [
+          "Built-in checks help avoid unsafe copy operations.",
+          "Use Snapshot for clean publication, FullHistory where ancestry matters, and plan-only mode before any move that could affect an existing destination."
+        ]
+      ],
+      "decisionDetails": [
+        [
+          "Make history preservation an explicit choice.",
+          "Safety and recoverability matter more than silently copying every possible property. Secrets, external DNS, and some GitHub-side features are deliberately outside the migration scope."
+        ],
+        [
+          "Expose the intended operation before execution.",
+          "A normal Git clone does not recreate every GitHub-side setting or release artifact, and a fresh public copy may intentionally need a clean provenance boundary."
+        ],
+        [
+          "Prefer safety checks to surprising repository changes.",
+          "Review a non-mutating plan, choose Snapshot or FullHistory, and explicitly execute the approved operation. Optional releases and GitHub Pages restoration have separate opt-in behavior and verification boundaries."
+        ]
+      ],
+      "statusDetails": [
+        "Safety and recoverability matter more than silently copying every possible property. Secrets, external DNS, and some GitHub-side features are deliberately outside the migration scope.",
+        "For exact current usage, prerequisites, and release status, consult the source repository and published documentation."
+      ]
     }
   },
   {
@@ -95,7 +223,51 @@
         "Make governance and traceability part of the operating model.",
         "Define the normative rules separately from implementation."
       ],
-      "status": "The specification repository and its published documentation are authoritative for current requirements and revisions."
+      "status": "The specification repository and its published documentation are authoritative for current requirements and revisions.",
+      "problemDetails": [
+        "A succession of AI-generated outputs is not automatically an improving system. Without evidence and explicit validation, repeated activity can amplify mistakes.",
+        "The underlying question is not simply whether the project can perform a task, but how that task can remain understandable, repeatable, and safe as conditions change."
+      ],
+      "solutionDetails": [
+        "The operating model connects execution with observation, evaluation, classification, adaptation, validation, and reuse. Governance determines which evidence warrants the next change.",
+        "Use the specification to evaluate whether a repository's AI-assisted process preserves evidence, governs changes, and learns across executions."
+      ],
+      "audienceDetails": [
+        "A practical fit is a reader or maintainer who wants a defined workflow and documented boundaries rather than an unexplained one-off operation.",
+        "Use the specification to evaluate whether a repository's AI-assisted process preserves evidence, governs changes, and learns across executions."
+      ],
+      "workflowDetails": [
+        [
+          "Defines an execution-to-evidence-to-improvement lifecycle.",
+          "The operating model connects execution with observation, evaluation, classification, adaptation, validation, and reuse. Governance determines which evidence warrants the next change."
+        ],
+        [
+          "Distinguishes validated learning from unverified observations.",
+          "The specification separates normative expectations from tools that implement them; that creates a clearer contract but requires framework and operator adoption."
+        ],
+        [
+          "Establishes governance and traceability for continued operation.",
+          "Use the specification to evaluate whether a repository's AI-assisted process preserves evidence, governs changes, and learns across executions."
+        ]
+      ],
+      "decisionDetails": [
+        [
+          "Treat evidence as distinct from assumption.",
+          "The specification separates normative expectations from tools that implement them; that creates a clearer contract but requires framework and operator adoption."
+        ],
+        [
+          "Make governance and traceability part of the operating model.",
+          "A succession of AI-generated outputs is not automatically an improving system. Without evidence and explicit validation, repeated activity can amplify mistakes."
+        ],
+        [
+          "Define the normative rules separately from implementation.",
+          "The operating model connects execution with observation, evaluation, classification, adaptation, validation, and reuse. Governance determines which evidence warrants the next change."
+        ]
+      ],
+      "statusDetails": [
+        "The specification separates normative expectations from tools that implement them; that creates a clearer contract but requires framework and operator adoption.",
+        "For exact current usage, prerequisites, and release status, consult the source repository and published documentation."
+      ]
     }
   },
   {
@@ -119,7 +291,51 @@
         "Remain independent of programming language and toolchain.",
         "Support manual operation before repository-specific tools are built."
       ],
-      "status": "The framework repository contains the current installation model, operating artifacts, and onboarding guidance."
+      "status": "The framework repository contains the current installation model, operating artifacts, and onboarding guidance.",
+      "problemDetails": [
+        "Repositories need a discoverable, consistent starting point rather than assuming an agent knows where to find current work and authority.",
+        "The underlying question is not simply whether the project can perform a task, but how that task can remain understandable, repeatable, and safe as conditions change."
+      ],
+      "solutionDetails": [
+        "Read .flywheel/manifest.yaml, follow its entrypoint, load the required operating artifacts in order, then use missions, goals, execution records, and evidence to govern work.",
+        "Adopt the framework when an existing repository needs an explicit AI operating model, including lifecycle records, decisions, and evidence."
+      ],
+      "audienceDetails": [
+        "A practical fit is a reader or maintainer who wants a defined workflow and documented boundaries rather than an unexplained one-off operation.",
+        "Adopt the framework when an existing repository needs an explicit AI operating model, including lifecycle records, decisions, and evidence."
+      ],
+      "workflowDetails": [
+        [
+          "Installs a canonical .flywheel structure and manifest-driven startup.",
+          "Read .flywheel/manifest.yaml, follow its entrypoint, load the required operating artifacts in order, then use missions, goals, execution records, and evidence to govern work."
+        ],
+        [
+          "Provides onboarding, bootstrap missions, and goal records.",
+          "The framework is intentionally toolchain-neutral. That allows adoption across repositories, but repository-specific automation emerges through onboarding rather than being prescribed upfront."
+        ],
+        [
+          "Captures lifecycle state, evidence, learning, and governance.",
+          "Adopt the framework when an existing repository needs an explicit AI operating model, including lifecycle records, decisions, and evidence."
+        ]
+      ],
+      "decisionDetails": [
+        [
+          "Use the manifest as the authoritative entry point.",
+          "The framework is intentionally toolchain-neutral. That allows adoption across repositories, but repository-specific automation emerges through onboarding rather than being prescribed upfront."
+        ],
+        [
+          "Remain independent of programming language and toolchain.",
+          "Repositories need a discoverable, consistent starting point rather than assuming an agent knows where to find current work and authority."
+        ],
+        [
+          "Support manual operation before repository-specific tools are built.",
+          "Read .flywheel/manifest.yaml, follow its entrypoint, load the required operating artifacts in order, then use missions, goals, execution records, and evidence to govern work."
+        ]
+      ],
+      "statusDetails": [
+        "The framework is intentionally toolchain-neutral. That allows adoption across repositories, but repository-specific automation emerges through onboarding rather than being prescribed upfront.",
+        "For exact current usage, prerequisites, and release status, consult the source repository."
+      ]
     }
   },
   {
@@ -143,7 +359,51 @@
         "Keep the command surface cross-platform.",
         "Preserve repository-specific information during planned upgrades."
       ],
-      "status": "Under active development. Commands and behavior described as planned should not be treated as shipped until verified in the repository."
+      "status": "Under active development. Commands and behavior described as planned should not be treated as shipped until verified in the repository.",
+      "problemDetails": [
+        "When lifecycle operations remain entirely manual, teams may interpret the same framework rules differently and struggle to automate routine checks.",
+        "The underlying question is not simply whether the project can perform a task, but how that task can remain understandable, repeatable, and safe as conditions change."
+      ],
+      "solutionDetails": [
+        "The README proposes commands for initialization, missions, goals, validation, and upgrades; a stable, cross-platform command interface is the intended operational boundary.",
+        "Track this project if you want a .NET-oriented terminal interface to the Flywheel model; verify implemented commands before integrating it."
+      ],
+      "audienceDetails": [
+        "A practical fit is a reader or maintainer who wants a defined workflow and documented boundaries rather than an unexplained one-off operation.",
+        "Track this project if you want a .NET-oriented terminal interface to the Flywheel model; verify implemented commands before integrating it."
+      ],
+      "workflowDetails": [
+        [
+          "Planned installation and initialization commands.",
+          "The README proposes commands for initialization, missions, goals, validation, and upgrades; a stable, cross-platform command interface is the intended operational boundary."
+        ],
+        [
+          "Planned mission and goal management, validation, and upgrades.",
+          "The design prioritizes a coherent command contract over adding ad hoc commands quickly; the current development status matters when evaluating availability."
+        ],
+        [
+          "Designed for cross-platform use and machine-readable automation output.",
+          "Track this project if you want a .NET-oriented terminal interface to the Flywheel model; verify implemented commands before integrating it."
+        ]
+      ],
+      "decisionDetails": [
+        [
+          "Plan consistent, script-friendly commands.",
+          "The design prioritizes a coherent command contract over adding ad hoc commands quickly; the current development status matters when evaluating availability."
+        ],
+        [
+          "Keep the command surface cross-platform.",
+          "When lifecycle operations remain entirely manual, teams may interpret the same framework rules differently and struggle to automate routine checks."
+        ],
+        [
+          "Preserve repository-specific information during planned upgrades.",
+          "The README proposes commands for initialization, missions, goals, validation, and upgrades; a stable, cross-platform command interface is the intended operational boundary."
+        ]
+      ],
+      "statusDetails": [
+        "The design prioritizes a coherent command contract over adding ad hoc commands quickly; the current development status matters when evaluating availability.",
+        "For exact current usage, prerequisites, and release status, consult the source repository."
+      ]
     }
   },
   {
@@ -167,7 +427,51 @@
         "Validate artifacts before relying on them.",
         "Keep local operations explicit and safeguarded."
       ],
-      "status": "Consult the repository for current commands, supported operations, and limitations."
+      "status": "Consult the repository for current commands, supported operations, and limitations.",
+      "problemDetails": [
+        "Automation needs predictable error handling and safe mutation, particularly when lifecycle files encode active work and governance decisions.",
+        "The underlying question is not simply whether the project can perform a task, but how that task can remain understandable, repeatable, and safe as conditions change."
+      ],
+      "solutionDetails": [
+        "The Python CLI uses plan-first installation and upgrade with explicit apply, validates installation archives and framework paths, and exposes status, validation, and supported execution-lifecycle transitions.",
+        "Use it when Python-based scripting needs structured Flywheel status and controlled lifecycle operations; check documented supported platforms and commands."
+      ],
+      "audienceDetails": [
+        "A practical fit is a reader or maintainer who wants a defined workflow and documented boundaries rather than an unexplained one-off operation.",
+        "Use it when Python-based scripting needs structured Flywheel status and controlled lifecycle operations; check documented supported platforms and commands."
+      ],
+      "workflowDetails": [
+        [
+          "Inspect and validate local Flywheel artifacts.",
+          "The Python CLI uses plan-first installation and upgrade with explicit apply, validates installation archives and framework paths, and exposes status, validation, and supported execution-lifecycle transitions."
+        ],
+        [
+          "Support installation and lifecycle operations.",
+          "The CLI rejects ambiguous state rather than guessing or overwriting existing local content. The README explicitly lists deferred administrative commands and other limitations."
+        ],
+        [
+          "Use structured command results for automation and diagnostics.",
+          "Use it when Python-based scripting needs structured Flywheel status and controlled lifecycle operations; check documented supported platforms and commands."
+        ]
+      ],
+      "decisionDetails": [
+        [
+          "Use structured command results for automation.",
+          "The CLI rejects ambiguous state rather than guessing or overwriting existing local content. The README explicitly lists deferred administrative commands and other limitations."
+        ],
+        [
+          "Validate artifacts before relying on them.",
+          "Automation needs predictable error handling and safe mutation, particularly when lifecycle files encode active work and governance decisions."
+        ],
+        [
+          "Keep local operations explicit and safeguarded.",
+          "The Python CLI uses plan-first installation and upgrade with explicit apply, validates installation archives and framework paths, and exposes status, validation, and supported execution-lifecycle transitions."
+        ]
+      ],
+      "statusDetails": [
+        "The CLI rejects ambiguous state rather than guessing or overwriting existing local content. The README explicitly lists deferred administrative commands and other limitations.",
+        "For exact current usage, prerequisites, and release status, consult the source repository."
+      ]
     }
   },
   {
@@ -191,7 +495,51 @@
         "Tie outcomes to immutable source revisions.",
         "Include boundary, failure, and recovery scenarios."
       ],
-      "status": "The testing repository records current fixtures, test methods, and published evidence."
+      "status": "The testing repository records current fixtures, test methods, and published evidence.",
+      "problemDetails": [
+        "Prompt-driven tests are difficult to compare when the tested revision, prompt, and evidence are not recorded together.",
+        "The underlying question is not simply whether the project can perform a task, but how that task can remain understandable, repeatable, and safe as conditions change."
+      ],
+      "solutionDetails": [
+        "Keep prompts, fixtures, runners, and captured results under test/ai, and record immutable framework and test-source revisions with each run.",
+        "Use it to assess a framework revision across normal paths, edge cases, failures, and recovery before treating a change as validated."
+      ],
+      "audienceDetails": [
+        "A practical fit is a reader or maintainer who wants a defined workflow and documented boundaries rather than an unexplained one-off operation.",
+        "Use it to assess a framework revision across normal paths, edge cases, failures, and recovery before treating a change as validated."
+      ],
+      "workflowDetails": [
+        [
+          "Versioned prompts, fixtures, and test runners.",
+          "Keep prompts, fixtures, runners, and captured results under test/ai, and record immutable framework and test-source revisions with each run."
+        ],
+        [
+          "Normal, boundary, failure, and recovery test scenarios.",
+          "Separating tests from the distributed framework adds repository boundaries but reduces the risk of coupling test scaffolding to user installations."
+        ],
+        [
+          "Durable evidence linked to exact test and framework revisions.",
+          "Use it to assess a framework revision across normal paths, edge cases, failures, and recovery before treating a change as validated."
+        ]
+      ],
+      "decisionDetails": [
+        [
+          "Separate test assets from the installable framework.",
+          "Separating tests from the distributed framework adds repository boundaries but reduces the risk of coupling test scaffolding to user installations."
+        ],
+        [
+          "Tie outcomes to immutable source revisions.",
+          "Prompt-driven tests are difficult to compare when the tested revision, prompt, and evidence are not recorded together."
+        ],
+        [
+          "Include boundary, failure, and recovery scenarios.",
+          "Keep prompts, fixtures, runners, and captured results under test/ai, and record immutable framework and test-source revisions with each run."
+        ]
+      ],
+      "statusDetails": [
+        "Separating tests from the distributed framework adds repository boundaries but reduces the risk of coupling test scaffolding to user installations.",
+        "For exact current usage, prerequisites, and release status, consult the source repository."
+      ]
     }
   },
   {
@@ -215,7 +563,51 @@
         "Keep the experiment reproducible.",
         "Report observations without overstating general conclusions."
       ],
-      "status": "This is a proof of concept; see the repository for scripts, observations, and conclusions."
+      "status": "This is a proof of concept; see the repository for scripts, observations, and conclusions.",
+      "problemDetails": [
+        "A publication-age setting sounds like a restore-time block, but package selection, version pinning, and floating references behave differently.",
+        "The underlying question is not simply whether the project can perform a task, but how that task can remain understandable, repeatable, and safe as conditions change."
+      ],
+      "solutionDetails": [
+        "A controlled local feed holds an older 1.0.0 and newer 2.0.0 test package. Five scenarios compare package add, update, explicit restore, and floating restore under a 72-hour cooldown.",
+        "Use the findings when deciding whether cooldowns help a dependency-update workflow; complement the setting with other supply-chain controls."
+      ],
+      "audienceDetails": [
+        "A practical fit is a reader or maintainer who wants a defined workflow and documented boundaries rather than an unexplained one-off operation.",
+        "Use the findings when deciding whether cooldowns help a dependency-update workflow; complement the setting with other supply-chain controls."
+      ],
+      "workflowDetails": [
+        [
+          "Reproducible experiments for .NET 11 RC2 packages.",
+          "A controlled local feed holds an older 1.0.0 and newer 2.0.0 test package. Five scenarios compare package add, update, explicit restore, and floating restore under a 72-hour cooldown."
+        ],
+        [
+          "Compare automatic package version selection against explicit restore.",
+          "The local experiment isolates the feature and is reproducible, but it does not establish an optimal cooldown duration or prove package safety in real supply chains."
+        ],
+        [
+          "Document observable effects of publication cooldown behavior.",
+          "Use the findings when deciding whether cooldowns help a dependency-update workflow; complement the setting with other supply-chain controls."
+        ]
+      ],
+      "decisionDetails": [
+        [
+          "Compare automatic version selection with explicit restore.",
+          "The local experiment isolates the feature and is reproducible, but it does not establish an optimal cooldown duration or prove package safety in real supply chains."
+        ],
+        [
+          "Keep the experiment reproducible.",
+          "A publication-age setting sounds like a restore-time block, but package selection, version pinning, and floating references behave differently."
+        ],
+        [
+          "Report observations without overstating general conclusions.",
+          "A controlled local feed holds an older 1.0.0 and newer 2.0.0 test package. Five scenarios compare package add, update, explicit restore, and floating restore under a 72-hour cooldown."
+        ]
+      ],
+      "statusDetails": [
+        "The local experiment isolates the feature and is reproducible, but it does not establish an optimal cooldown duration or prove package safety in real supply chains.",
+        "For exact current usage, prerequisites, and release status, consult the source repository."
+      ]
     }
   }
 ]
