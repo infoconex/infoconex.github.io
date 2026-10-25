@@ -67,10 +67,15 @@ def render(project, slug):
         links = "".join(f'<a class="resource" href="/projects/{esc(x["slug"])}/"><strong>{esc(by_slug[x["slug"]]["name"])} ↗</strong><span>{esc(x["relationship"])}</span></a>' for x in related)
         sections.append(f'<section id="related" class="section"><span class="kicker">Explore further</span><h2>Related projects</h2><div class="resources">{links}</div></section>')
     articles = project.get("articles", [])
-    articles_card = '<div class="card"><h2>Related articles</h2>' + "".join(
-        external_link(x["url"], x["title"]+" ↗", "article") + f'<p class="article-desc">{esc(x["description"])}</p>' for x in articles) + '</div>' if articles else ""
+    # Related articles are a real scrollable section, not a sticky-sidebar card.
+    if articles:
+        article_links = "".join(
+            '<div class="resource">' + external_link(x["url"], x["title"] + " ↗", "article-title")
+            + f'<p>{esc(x["description"])}</p></div>' for x in articles
+        )
+        sections.append(f'<section id="articles" class="section"><span class="kicker">Further reading</span><h2>Related articles</h2><div class="resources">{article_links}</div></section>')
     toc = "".join(f'<a href="#{sid}">{esc(title)}</a>' for sid,title in
-        [("problem","The problem"),("solution","The solution"),("audience","Who it\'s for"),("workflow","How it works"),("decisions","Design decisions"),("status","Current state"),("related","Related projects")]
+        [("problem","The problem"),("solution","The solution"),("audience","Who it\'s for"),("workflow","How it works"),("decisions","Design decisions"),("status","Current state"),("related","Related projects"),("articles","Related articles")]
         if any(f'id="{sid}"' in x for x in sections))
     details_card = f'<div class="card"><h2>Project details</h2><div class="side-actions">{actions}</div><dl>{details_html}</dl></div>' if details_html else ""
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
@@ -83,7 +88,7 @@ def render(project, slug):
 <div class="wrap"><div class="crumb"><a href="/#projects">All projects</a><span> / </span>{esc(name)}</div>
 <section class="hero"><div class="hero-copy"><p class="eyebrow">{esc(info["kind"])} · {esc(project["category"])}</p><h1>{esc(name)}</h1><p class="tagline">{esc(info["tagline"])}</p><p class="hero-description">{esc(project["seoDescription"])}</p></div><div class="hero-visual" aria-label="Illustration of project themes">{hero_visual}</div></section>
 <div class="layout"><main>{"".join(sections)}</main><aside class="sidebar" aria-label="Project context">{details_card}
-<div class="card"><h2>On this page</h2><nav class="toc">{toc}</nav></div>{articles_card}</aside></div></div>
+<div class="card"><h2>On this page</h2><nav class="toc">{toc}</nav></div></aside></div></div>
 <footer class="footer"><div class="wrap"><span>© infoconex · Design experiment</span><a href="/projects/{esc(slug)}/">View current page ↗</a></div></footer><script src="../scrollspy.js" defer></script></body></html>'''
 
 def main():
@@ -107,7 +112,7 @@ def main():
         assert ('Read documentation ↗' in page) == bool(project.get("website") and slug != "coding-blog")
         assert ('Visit publication ↗' in page) == (slug == "coding-blog")
         assert ('id="related"' in page) == bool(project.get("related")), "Related project section must be conditional"
-        assert ('Related articles</h2>' in page) == bool(project.get("articles")), "Articles card must be conditional"
+        assert ('id="articles"' in page) == bool(project.get("articles")), "Related articles section must be conditional"
         for item in project.get("articles", []):
             assert esc(item["url"]) in page, "Missing article"
         for item in project.get("related", []):
