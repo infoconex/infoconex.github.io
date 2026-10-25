@@ -33,6 +33,13 @@ for project in projects:
         assert item["url"] not in urls, f"Duplicate article for {slug}"
         urls.add(item["url"])
 
+for project in projects:
+    source = project.get("socialSource")
+    if source:
+        parsed = urlparse(source)
+        assert parsed.scheme == "https" and parsed.hostname == "raw.githubusercontent.com", "Social source must be a raw GitHub HTTPS URL"
+        assert parsed.path.startswith("/infoconex/") and parsed.path.lower().endswith((".png", ".jpg", ".jpeg", ".webp")), "Unapproved social source URL"
+
 # Optional lastmod values must be real ISO dates and must not be future-dated.
 for project in projects:
     if "lastmod" in project:
