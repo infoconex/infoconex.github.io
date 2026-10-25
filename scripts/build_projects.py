@@ -169,7 +169,7 @@ for project, slug in zip(projects, slugs):
     content = f'''<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#252F3A"><meta name="description" content="{e(desc)}">
+<meta name="theme-color" content="#252F3A"><meta name="description" content="{e(seo_description)}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="infoconex"><meta property="og:title" content="{e(seo_title)}"><meta property="og:description" content="{e(seo_description)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{share_image}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="{e(name)} social preview">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{e(seo_title)}"><meta name="twitter:description" content="{e(seo_description)}"><meta name="twitter:image" content="{share_image}">
 <link rel="canonical" href="{canonical}"><link rel="icon" href="../../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../styles.css">
