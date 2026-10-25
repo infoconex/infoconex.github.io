@@ -47,3 +47,6 @@
 
 /* Long-form project case studies */
 .case-section>p+p{margin-top:16px}.case-step p{color:var(--muted);line-height:1.7;font-size:.92rem;margin:9px 0 0}.case-bullets li{padding-left:6px;margin-bottom:23px}.case-bullets li strong{display:block;color:var(--text);font-weight:650;margin-bottom:8px}.case-bullets li p{margin:7px 0;color:var(--muted);font-size:.94rem;line-height:1.7}
+
+/* Related project and article cards */
+.case-resource-grid{display:grid;gap:14px;margin-top:24px}.case-resource-card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px 24px;transition:border-color .15s,transform .15s}.case-resource-card:hover{border-color:var(--accent);transform:translateY(-2px)}.case-resource-card h3{color:var(--text);font-size:1.08rem;margin:0 0 9px;line-height:1.4}.case-resource-card span{color:var(--accent);font-size:.85rem;font-weight:650}.case-resource-card p{color:var(--muted);font-size:.92rem;line-height:1.65;margin:10px 0 0}.case-resource-card:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
