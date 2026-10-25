@@ -23,8 +23,6 @@ jobs:
           python-version: '3.12'
       - name: Generate static project pages and sitemap
         run: python scripts/build_projects.py
-      - name: Generate Preview C examples (unindexed)
-        run: python scripts/build_design_preview.py
       - name: Install social image generator dependency
         run: python -m pip install 'Pillow>=11,<13'
       - name: Ensure social image fonts are available
@@ -38,7 +36,6 @@ jobs:
           mkdir -p _site
           cp index.html styles.css script.js project-scrollspy.js projects.json favicon.svg robots.txt sitemap.xml pages-sitemap.xml _site/
           cp -R projects _site/projects
-          cp -R design-preview _site/design-preview
           cp -R assets _site/assets
           touch _site/.nojekyll
       - name: Upload GitHub Pages artifact
