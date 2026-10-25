@@ -217,7 +217,7 @@
     "audience": "Teams designing evidence-driven, repeatable AI-assisted engineering processes.",
     "caseStudy": {
       "problem": "AI-assisted work can repeat tasks without accumulating verified learning or clearly governing what happens next.",
-      "solution": "Define a lifecycle that connects execution, observation, evidence, evaluation, validated improvement, and reuse.",
+      "solution": "Establish a governed operating model in which AI-assisted work produces accountable decisions, measurable outcomes, and reusable learning rather than isolated outputs.",
       "decisions": [
         "Treat evidence as distinct from assumption.",
         "Make governance and traceability part of the operating model.",
@@ -225,48 +225,48 @@
       ],
       "status": "The specification repository and its published documentation are authoritative for current requirements and revisions.",
       "problemDetails": [
-        "A succession of AI-generated outputs is not automatically an improving system. Without evidence and explicit validation, repeated activity can amplify mistakes.",
-        "The underlying question is not simply whether the project can perform a task, but how that task can remain understandable, repeatable, and safe as conditions change."
+        "Generating a sequence of AI-assisted deliverables does not by itself demonstrate improvement. Without preserved evidence, teams cannot reliably distinguish a successful adaptation from a repeated assumption.",
+        "The challenge is to make learning reviewable and cumulative while retaining control over decisions that affect future executions."
       ],
       "solutionDetails": [
-        "The operating model connects execution with observation, evaluation, classification, adaptation, validation, and reuse. Governance determines which evidence warrants the next change.",
-        "Use the specification to evaluate whether a repository's AI-assisted process preserves evidence, governs changes, and learns across executions."
+        "The specification defines the responsibilities and records required at each stage of the Flywheel, including the evidence needed to assess outcomes before changing the way work is performed.",
+        "Governance provides the decision boundaries: what can proceed, what requires review, and what must be validated before an improvement becomes part of future execution."
       ],
       "audienceDetails": [
-        "A practical fit is a reader or maintainer who wants a defined workflow and documented boundaries rather than an unexplained one-off operation.",
-        "Use the specification to evaluate whether a repository's AI-assisted process preserves evidence, governs changes, and learns across executions."
+        "It is intended for engineering teams, repository owners, and AI operators who need a repeatable process with explicit accountability.",
+        "It can also serve as a reference for evaluating whether an existing AI-assisted workflow captures trustworthy evidence, incorporates human decisions, and improves over time."
       ],
       "workflowDetails": [
         [
-          "Defines an execution-to-evidence-to-improvement lifecycle.",
-          "The operating model connects execution with observation, evaluation, classification, adaptation, validation, and reuse. Governance determines which evidence warrants the next change."
+          "Start with a defined mission and goal so each execution has an explicit purpose and expected outcome.",
+          "Observe what happened and capture durable evidence that later evaluation can inspect."
         ],
         [
-          "Distinguishes validated learning from unverified observations.",
-          "The specification separates normative expectations from tools that implement them; that creates a clearer contract but requires framework and operator adoption."
+          "Evaluate outcomes, classify the observations, and decide whether an adjustment is justified.",
+          "An observed result is not automatically a validated improvement; the model requires a separate assessment before reuse."
         ],
         [
-          "Establishes governance and traceability for continued operation.",
-          "Use the specification to evaluate whether a repository's AI-assisted process preserves evidence, governs changes, and learns across executions."
+          "Record decisions, approvals, and the evidence supporting the selected change.",
+          "Only validated learning should influence later work, keeping the process auditable and avoiding unexamined repetition."
         ]
       ],
       "decisionDetails": [
         [
-          "Treat evidence as distinct from assumption.",
-          "The specification separates normative expectations from tools that implement them; that creates a clearer contract but requires framework and operator adoption."
+          "An observation can suggest a problem or improvement, but it does not prove the proposed change is effective.",
+          "Validation creates a deliberate boundary between collecting evidence and adopting new behavior."
         ],
         [
-          "Make governance and traceability part of the operating model.",
-          "A succession of AI-generated outputs is not automatically an improving system. Without evidence and explicit validation, repeated activity can amplify mistakes."
+          "Lifecycle transitions and changes need traceable reasons, evidence, and appropriate human authority.",
+          "This helps reviewers understand not just what changed, but why a particular change was allowed."
         ],
         [
-          "Define the normative rules separately from implementation.",
-          "The operating model connects execution with observation, evaluation, classification, adaptation, validation, and reuse. Governance determines which evidence warrants the next change."
+          "The specification establishes the contract; the framework and CLIs provide ways to operate against it.",
+          "Separating rules from tooling allows different implementations to share the same expectations without prescribing one runtime or interface."
         ]
       ],
       "statusDetails": [
-        "The specification separates normative expectations from tools that implement them; that creates a clearer contract but requires framework and operator adoption.",
-        "For exact current usage, prerequisites, and release status, consult the source repository and published documentation."
+        "The specification is the reference for the operating model; implementation details and command behavior belong to the associated Framework and CLI repositories.",
+        "Review the published specification for the current lifecycle rules, governance requirements, and revision history."
       ]
     }
   },
