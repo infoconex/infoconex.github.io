@@ -154,7 +154,7 @@ for project, slug in zip(projects, slugs):
     articles_section = (f'<section class="case-section" id="articles"><span class="case-kicker">07 / Deeper reading</span><h2>Related articles</h2><p>Engineering context and lessons behind this project.</p><div class="case-resource-grid">{article_cards}</div></section>') if article_cards else ""
     related_number = "08" if article_cards else "07"
     related_section = (f'<section class="case-section" id="related"><span class="case-kicker">{related_number} / Explore further</span><h2>Related projects</h2><p>Explore other projects and how they connect to this work.</p><div class="case-resource-grid">{related_cards}</div></section>') if related_cards else ""
-    optional_toc = ('<a href="#articles">Related articles</a>' if article_cards else "") + ('<a href="#related">Related projects</a>' if related_cards else "")
+    optional_toc = ('<a href="#articles"><span class="case-toc-number">07</span>Related articles</a>' if article_cards else "") + (f'<a href="#related"><span class="case-toc-number">{related_number}</span>Related projects</a>' if related_cards else "")
     schema = {
         "@context": "https://schema.org", "@graph": [
             {"@type": "WebPage", "name": name, "description": seo_description, "url": canonical,
@@ -194,7 +194,7 @@ for project, slug in zip(projects, slugs):
 </article></div>
 <aside class="case-aside" aria-label="Project context">
 <div class="case-side-card"><h2>Project details</h2><div class="case-side-actions">{actions}</div><dl>{detail_rows}</dl></div>
-<div class="case-side-card"><h2>On this page</h2><nav class="case-toc" aria-label="Project sections"><a href="#problem">The problem</a><a href="#solution">The solution</a><a href="#audience">Who it's for</a><a href="#workflow">How it works</a><a href="#decisions">Design decisions</a><a href="#status">Current state</a>{optional_toc}</nav></div>
+<div class="case-side-card"><h2>On this page</h2><nav class="case-toc" aria-label="Project sections"><a href="#problem"><span class="case-toc-number">01</span>The problem</a><a href="#solution"><span class="case-toc-number">02</span>The solution</a><a href="#audience"><span class="case-toc-number">03</span>Who it's for</a><a href="#workflow"><span class="case-toc-number">04</span>How it works</a><a href="#decisions"><span class="case-toc-number">05</span>Design decisions</a><a href="#status"><span class="case-toc-number">06</span>Current state</a>{optional_toc}</nav></div>
 </aside></div></div></main>
 <footer class="site-footer"><div class="container footer-inner"><span>© infoconex</span><nav aria-label="Footer navigation"><a href="/#projects">All projects</a><a href="https://github.com/infoconex">GitHub ↗</a></nav></div></footer>
 <script src="../../project-scrollspy.js" defer></script></body></html>'''
