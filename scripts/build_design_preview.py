@@ -86,8 +86,7 @@ def render(project, slug):
 <div class="notice"><div class="wrap"><span>Preview C · Unindexed design experiment</span><nav><a href="/projects/{esc(slug)}/">Existing page</a><a href="/design-preview/modern-case-study/">Other examples</a></nav></div></div>
 <header class="header"><div class="wrap"><a class="brand" href="/"><span class="logo">i.</span> infoconex</a><nav><a href="/#projects">All projects</a>{external_link("https://github.com/infoconex","GitHub ↗")}</nav></div></header>
 <div class="wrap"><div class="crumb"><a href="/#projects">All projects</a><span> / </span>{esc(name)}</div>
-<section class="hero"><div class="hero-copy"><p class="eyebrow">{esc(info["kind"])} · {esc(project["category"])}</p><h1>{esc(name)}</h1><p class="tagline">{esc(info["tagline"])}</p><p class="hero-description">{esc(project["seoDescription"])}</p></div><div class="hero-visual" aria-label="Illustration of project themes">{hero_visual}</div></section>
-<div class="layout"><main>{"".join(sections)}</main><aside class="sidebar" aria-label="Project context">{details_card}
+<div class="layout"><main><section class="hero"><div class="hero-copy"><p class="eyebrow">{esc(info["kind"])} · {esc(project["category"])}</p><h1>{esc(name)}</h1><p class="tagline">{esc(info["tagline"])}</p><p class="hero-description">{esc(project["seoDescription"])}</p></div><div class="hero-visual" aria-label="Illustration of project themes">{hero_visual}</div></section>{"".join(sections)}</main><aside class="sidebar" aria-label="Project context">{details_card}
 <div class="card"><h2>On this page</h2><nav class="toc">{toc}</nav></div></aside></div></div>
 <footer class="footer"><div class="wrap"><span>© infoconex · Design experiment</span><a href="/projects/{esc(slug)}/">View current page ↗</a></div></footer><script src="../scrollspy.js" defer></script></body></html>'''
 
