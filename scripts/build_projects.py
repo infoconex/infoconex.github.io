@@ -101,6 +101,9 @@ project_by_slug = dict(zip(slugs, projects))
 for project, slug in zip(projects, slugs):
     name, desc, category, github = (project[key] for key in ("name", "description", "category", "url"))
     canonical = f"{BASE}/projects/{slug}/"
+    seo_description = project["seoDescription"]
+    seo_title = f"{name} | infoconex"
+    share_image = f"{BASE}/assets/social/{slug}.png"
     docs = project.get("website")
     if docs:
         assert urlparse(docs).scheme == "https" and urlparse(docs).netloc, "Invalid website URL"
@@ -152,19 +155,25 @@ for project, slug in zip(projects, slugs):
     related_section = (f'<section class="case-section" id="related"><span class="case-kicker">{related_number} / Explore further</span><h2>Related projects</h2><p>Explore other projects and how they connect to this work.</p><div class="case-resource-grid">{related_cards}</div></section>') if related_cards else ""
     optional_toc = ('<a href="#articles">Related articles</a>' if article_cards else "") + ('<a href="#related">Related projects</a>' if related_cards else "")
     schema = {
-        "@context": "https://schema.org", "@type": "WebPage",
-        "name": name, "description": desc, "url": canonical,
-        "isPartOf": {"@type": "WebSite", "name": "infoconex", "url": BASE + "/"},
-        "about": {"@type": "SoftwareSourceCode", "name": name, "description": desc, "codeRepository": github}
+        "@context": "https://schema.org", "@graph": [
+            {"@type": "WebPage", "name": name, "description": seo_description, "url": canonical,
+             "isPartOf": {"@type": "WebSite", "name": "infoconex", "url": BASE + "/"},
+             "about": {"@type": "SoftwareSourceCode", "name": name, "description": desc,
+                       "codeRepository": github, "url": github}},
+            {"@type": "BreadcrumbList", "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Projects", "item": BASE + "/"},
+                {"@type": "ListItem", "position": 2, "name": name, "item": canonical}
+            ]}
+        ]
     }
     content = f'''<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#252F3A"><meta name="description" content="{e(desc)}">
-<meta property="og:type" content="website"><meta property="og:site_name" content="infoconex"><meta property="og:title" content="{e(name)} | infoconex"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{canonical}">
-<meta name="twitter:card" content="summary"><meta name="twitter:title" content="{e(name)} | infoconex"><meta name="twitter:description" content="{e(desc)}">
+<meta property="og:type" content="website"><meta property="og:site_name" content="infoconex"><meta property="og:title" content="{e(seo_title)}"><meta property="og:description" content="{e(seo_description)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{share_image}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="{e(name)} social preview">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{e(seo_title)}"><meta name="twitter:description" content="{e(seo_description)}"><meta name="twitter:image" content="{share_image}">
 <link rel="canonical" href="{canonical}"><link rel="icon" href="../../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../styles.css">
-<title>{e(name)} | infoconex open-source projects</title><script type="application/ld+json">{json.dumps(schema, ensure_ascii=False).replace("<", "\\u003c")}</script>
+<title>{e(seo_title)}</title><script type="application/ld+json">{json.dumps(schema, ensure_ascii=False).replace("<", "\\u003c")}</script>
 </head><body>
 <header class="site-header"><div class="container header-inner"><a class="brand" href="/"><span class="brand-mark">i<span>.</span></span> infoconex</a><nav aria-label="Main navigation"><a href="/#projects">All projects</a><a href="https://github.com/infoconex">GitHub ↗</a></nav></div></header>
 <main class="case-shell"><div class="container case-columns"><div class="case-main">
