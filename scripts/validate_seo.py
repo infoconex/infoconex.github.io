@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Check local SEO consistency without third-party packages or network access."""
 import json
+from urllib.parse import urlparse
 from html.parser import HTMLParser
 from pathlib import Path
 import xml.etree.ElementTree as ET
@@ -11,17 +12,43 @@ projects = json.loads((ROOT / "projects.json").read_text())
 paths = ["/"] + [f"/projects/{p['url'].rstrip('/').split('/')[-1]}/" for p in projects]
 ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
 
+slugs = {p["url"].rstrip("/").split("/")[-1] for p in projects}
+assert len(slugs) == len(projects), "Duplicate project slugs"
+for project in projects:
+    slug = project["url"].rstrip("/").split("/")[-1]
+    seen = set()
+    for item in project.get("related", []):
+        target = item["slug"]
+        assert target in slugs and target != slug, f"Invalid related project: {slug} -> {target}"
+        assert target not in seen, f"Duplicate related project: {slug} -> {target}"
+        assert isinstance(item.get("relationship"), str) and item["relationship"].strip(), f"Missing relationship: {slug}"
+        seen.add(target)
+    urls = set()
+    for item in project.get("articles", []):
+        parsed = urlparse(item["url"])
+        assert parsed.scheme == "https" and parsed.netloc and not parsed.username and not parsed.password, f"Invalid article URL for {slug}"
+        assert all(isinstance(item.get(key), str) and item[key].strip() for key in ("title", "description")), f"Incomplete article for {slug}"
+        assert item["url"] not in urls, f"Duplicate article for {slug}"
+        urls.add(item["url"])
+
 class Extract(HTMLParser):
     def __init__(self):
         super().__init__()
         self.links = []
+        self.ids = set()
+        self.anchor_fragments = []
         self.canonical = []
         self.titles = 0
         self.descriptions = 0
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if attrs.get("id"):
+            assert attrs["id"] not in self.ids, f"Duplicate HTML id: {attrs['id']}"
+            self.ids.add(attrs["id"])
         if tag == "a" and attrs.get("href"):
             self.links.append(attrs["href"])
+            if attrs["href"].startswith("#"):
+                self.anchor_fragments.append(attrs["href"][1:])
         if tag == "link" and attrs.get("rel") == "canonical":
             self.canonical.append(attrs.get("href"))
         if tag == "title":
@@ -39,6 +66,8 @@ for url in paths:
     parser.feed(file.read_text())
     assert parser.canonical == [BASE + url], f"Canonical mismatch: {file}"
     assert parser.titles == 1 and parser.descriptions == 1, f"Missing metadata: {file}"
+    for fragment in parser.anchor_fragments:
+        assert fragment in parser.ids, f"Broken anchor #{fragment} in {file}"
     for href in parser.links:
         if href.startswith("/") and not href.startswith("//") and not href.startswith("/#"):
             target = href.split("#", 1)[0].split("?", 1)[0]
