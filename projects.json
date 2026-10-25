@@ -61,7 +61,13 @@
         "Editorial clarity takes precedence over reproducing every source file on the portfolio page; the published articles hold the full examples.",
         "For exact current usage, prerequisites, and release status, consult the source repository and published documentation."
       ]
-    }
+    },
+    "related": [
+      {
+        "slug": "isolated-dotnet-sdk",
+        "relationship": "Featured engineering topic"
+      }
+    ]
   },
   {
     "name": "Isolated .NET SDK",
@@ -130,7 +136,24 @@
         "This is filesystem isolation, not a security sandbox. The SDK still runs with the current user's permissions; explicit invocation replaces transparent PATH switching.",
         "For exact current usage, prerequisites, and release status, consult the source repository and published documentation."
       ]
-    }
+    },
+    "related": [
+      {
+        "slug": "nuget-publication-cooldown-poc",
+        "relationship": "Used to run isolated .NET 11 RC2 experiments"
+      },
+      {
+        "slug": "coding-blog",
+        "relationship": "Engineering background and write-ups"
+      }
+    ],
+    "articles": [
+      {
+        "title": "How to Test a New .NET SDK Without Installing It System-Wide",
+        "url": "https://coding.infoconex.com/post/2026/09/20/how-to-test-a-new-dotnet-sdk-without-installing-it-system-wide",
+        "description": "The motivation, role of global.json, and lessons from evaluating new SDK versions without changing the machine-wide environment."
+      }
+    ]
   },
   {
     "name": "Copy GitHub Repo",
@@ -268,7 +291,21 @@
         "The specification is the reference for the operating model; implementation details and command behavior belong to the associated Framework and CLI repositories.",
         "Review the published specification for the current lifecycle rules, governance requirements, and revision history."
       ]
-    }
+    },
+    "related": [
+      {
+        "slug": "ai-flywheel-framework",
+        "relationship": "Installable implementation of the specification"
+      },
+      {
+        "slug": "ai-flywheel-cli",
+        "relationship": "Planned .NET command-line tooling"
+      },
+      {
+        "slug": "ai-flywheel-cli-python",
+        "relationship": "Python command-line implementation"
+      }
+    ]
   },
   {
     "name": "AI Flywheel Framework",
@@ -336,7 +373,25 @@
         "The framework is intentionally toolchain-neutral. That allows adoption across repositories, but repository-specific automation emerges through onboarding rather than being prescribed upfront.",
         "For exact current usage, prerequisites, and release status, consult the source repository."
       ]
-    }
+    },
+    "related": [
+      {
+        "slug": "ai-flywheel-spec",
+        "relationship": "Normative operating model"
+      },
+      {
+        "slug": "ai-flywheel-cli",
+        "relationship": "Planned management interface"
+      },
+      {
+        "slug": "ai-flywheel-cli-python",
+        "relationship": "Python tooling for local operations"
+      },
+      {
+        "slug": "ai-flywheel-framework-testing",
+        "relationship": "Repeatable framework evaluation"
+      }
+    ]
   },
   {
     "name": "AI Flywheel CLI",
@@ -404,7 +459,17 @@
         "The design prioritizes a coherent command contract over adding ad hoc commands quickly; the current development status matters when evaluating availability.",
         "For exact current usage, prerequisites, and release status, consult the source repository."
       ]
-    }
+    },
+    "related": [
+      {
+        "slug": "ai-flywheel-framework",
+        "relationship": "Framework the CLI is intended to manage"
+      },
+      {
+        "slug": "ai-flywheel-spec",
+        "relationship": "Normative operating model"
+      }
+    ]
   },
   {
     "name": "AI Flywheel CLI Python",
@@ -472,7 +537,17 @@
         "The CLI rejects ambiguous state rather than guessing or overwriting existing local content. The README explicitly lists deferred administrative commands and other limitations.",
         "For exact current usage, prerequisites, and release status, consult the source repository."
       ]
-    }
+    },
+    "related": [
+      {
+        "slug": "ai-flywheel-framework",
+        "relationship": "Framework artifacts and lifecycle"
+      },
+      {
+        "slug": "ai-flywheel-spec",
+        "relationship": "Normative operating model"
+      }
+    ]
   },
   {
     "name": "AI Flywheel Framework Testing",
@@ -540,7 +615,17 @@
         "Separating tests from the distributed framework adds repository boundaries but reduces the risk of coupling test scaffolding to user installations.",
         "For exact current usage, prerequisites, and release status, consult the source repository."
       ]
-    }
+    },
+    "related": [
+      {
+        "slug": "ai-flywheel-framework",
+        "relationship": "Framework under test"
+      },
+      {
+        "slug": "ai-flywheel-spec",
+        "relationship": "Behavioral requirements and governance"
+      }
+    ]
   },
   {
     "name": "NuGet Publication Cooldown POC",
@@ -608,6 +693,16 @@
         "The local experiment isolates the feature and is reproducible, but it does not establish an optimal cooldown duration or prove package safety in real supply chains.",
         "For exact current usage, prerequisites, and release status, consult the source repository."
       ]
-    }
+    },
+    "related": [
+      {
+        "slug": "isolated-dotnet-sdk",
+        "relationship": "Provides isolated SDK setup for the experiment"
+      },
+      {
+        "slug": "coding-blog",
+        "relationship": "Research context and technical writing"
+      }
+    ]
   }
 ]
