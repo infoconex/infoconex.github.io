@@ -34,7 +34,7 @@ jobs:
       - name: Stage published site
         run: |
           mkdir -p _site
-          cp CNAME index.html styles.css script.js project-scrollspy.js projects.json favicon.svg robots.txt sitemap.xml _site/
+          cp CNAME index.html styles.css script.js project-scrollspy.js projects.json favicon.svg robots.txt sitemap.xml dee2976b885148979d86df8b593b649e.txt _site/
           cp -R projects _site/projects
           cp -R assets _site/assets
           touch _site/.nojekyll
@@ -58,3 +58,44 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+  notify-indexnow:
+    name: Notify IndexNow after deployment
+    if: github.event_name != 'pull_request'
+    needs: deploy
+    runs-on: ubuntu-26.04
+    permissions:
+      contents: write
+    steps:
+      - name: Check out full history
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Find last successful submission
+        id: base
+        shell: bash
+        run: |
+          marker="refs/tags/indexnow-last-submitted"
+          git fetch origin "$marker:$marker" 2>/dev/null || true
+          base_sha="0000000000000000000000000000000000000000"
+          if git rev-parse --verify --quiet "$marker" >/dev/null; then
+            candidate="$(git rev-list -n 1 "$marker")"
+            if git merge-base --is-ancestor "$candidate" "$GITHUB_SHA"; then
+              base_sha="$candidate"
+            fi
+          fi
+          echo "sha=$base_sha" >> "$GITHUB_OUTPUT"
+      - name: Submit changed published pages
+        env:
+          BASE_SHA: ${{ steps.base.outputs.sha }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            python3 scripts/indexnow.py --all
+          else
+            python3 scripts/indexnow.py
+          fi
+      - name: Record last successful submission
+        run: |
+          git tag -f indexnow-last-submitted "$GITHUB_SHA"
+          git push --force origin refs/tags/indexnow-last-submitted
